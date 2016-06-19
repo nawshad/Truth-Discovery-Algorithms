@@ -49,18 +49,14 @@ public class Investment {
         }
        
         System.out.println("Updated Matrix with initial Cv_0 value");
-        for(int i = 0; i<scores_for_investment.length; i++){
-            for (int j=0; j<scores_for_investment[i].length; j++){
-                System.out.print(scores_for_investment[i][j]+" ");
-            }
-            System.out.println();
-        }
+        GeneralUtils.showMatrix(scores_for_investment);
        
         //Traverse through the matrix and update the claim values as per calculated source score. 
         int iter = 0;
         ArrayList<Double> source_Scores = new ArrayList<Double>();
         ArrayList<Double> claim_Scores = new ArrayList<Double>();
         
+       
         while(iter<totalIter){
             source_Scores = new ArrayList<Double>();
             for (int i=0; i<scores_for_investment.length; i++){
@@ -71,11 +67,10 @@ public class Investment {
                     claim_source_multiplied_score = scores_for_investment[i][j]*To_S.get(i);
                     //System.out.println("Claim Source Multiply Score:"+claim_source_multiplied_score);
                     //denominator = 0;
-                    for(int k = 0; k < GeneralUtils.sourceListforClaims(j, scores_for_investment).size(); k++){
-                        int Vr_count = GeneralUtils.sourceListforClaims(j, scores_for_investment).size();
-                        //System.out.println("Vr_Count:"+Vr_count);
-                        denominator+= To_S.get(GeneralUtils.sourceListforClaims(j, scores_for_investment).get(k))/Vr_count;
-
+                    for(int k = 0; k < GeneralUtils.sourceListforClaims(j /*,scores_for_investment*/).size(); k++){
+                        int Vr_count = GeneralUtils.sourceListforClaims(j /*scores_for_investment*/).size(); 
+                        //System.out.println("Vr_count:"+Vr_count);
+                        denominator+= To_S.get(GeneralUtils.sourceListforClaims(j /* scores_for_investment*/).get(k))/Vr_count;
                     }
                     //System.out.println("Denominator:"+denominator);
                     denominator*= Vs_count_List.get(i);
@@ -121,7 +116,8 @@ public class Investment {
         }
         
         GeneralUtils.showOrderedSources(source_Scores);
-        GeneralUtils.showOrderedClaims(claim_Scores);   
+        GeneralUtils.showOrderedClaims(claim_Scores); 
+        GeneralUtils.showClaimsPerDataItems(claim_Scores);
    }
     
    public static void pooledInvestmentCalculation(){
@@ -151,20 +147,16 @@ public class Investment {
         }
        
         System.out.println("Updated Matrix with initial Cv_0 value");
-        for(int i = 0; i<scores_for_investment.length; i++){
-            for (int j=0; j<scores_for_investment[i].length; j++){
-                System.out.print(scores_for_investment[i][j]+" ");
-            }
-            System.out.println();
-        }
+        GeneralUtils.showMatrix(scores_for_investment);
+        
        
         //Traverse through the matrix and update the claim values as per calculated source score. 
         int iter = 0;
-        ArrayList<Double> source_Scores = new ArrayList<Double>();
-        ArrayList<Double> claim_Scores = new ArrayList<Double>();
+        ArrayList<Double> source_Scores_List = new ArrayList<Double>();
+        ArrayList<Double> claim_Scores_List = new ArrayList<Double>();
         
         while(iter<totalIter){
-            source_Scores = new ArrayList<Double>();
+            source_Scores_List = new ArrayList<Double>();
             for (int i=0; i<scores_for_investment.length; i++){
                 double per_source_sum  = 0;
                 double claim_source_multiplied_score = 0;
@@ -173,10 +165,10 @@ public class Investment {
                     claim_source_multiplied_score = scores_for_investment[i][j]*To_S.get(i);
                     //System.out.println("Claim Source Multiply Score:"+claim_source_multiplied_score);
                     //denominator = 0;
-                    for(int k = 0; k < GeneralUtils.sourceListforClaims(j, scores_for_investment).size(); k++){
-                        int Vr_count = GeneralUtils.sourceListforClaims(j, scores_for_investment).size();
+                    for(int k = 0; k < GeneralUtils.sourceListforClaims(j/* scores*/).size(); k++){
+                        int Vr_count = GeneralUtils.sourceListforClaims(j/*, scores*/).size();
                         //System.out.println("Vr_Count:"+Vr_count);
-                        denominator+= To_S.get(GeneralUtils.sourceListforClaims(j, scores_for_investment).get(k))/Vr_count;
+                        denominator+= To_S.get(GeneralUtils.sourceListforClaims(j/*, scores*/).get(k))/Vr_count;
 
                     }
                     //System.out.println("Denominator:"+denominator);
@@ -185,7 +177,7 @@ public class Investment {
                     per_source_sum += claim_source_multiplied_score / denominator;
                 }
 
-                source_Scores.add(per_source_sum);
+                source_Scores_List.add(per_source_sum);
 
                 //System.out.println("Source scores:"+per_source_sum);
                 //Update claims of that source 
@@ -199,31 +191,52 @@ public class Investment {
                 } 
             }
             System.out.println("To Scores: "+To_S);
-            To_S =  source_Scores;
+            To_S =  source_Scores_List;
         
             //Calculate claims and update source values, here we have to initialize source values again and then iterate.
-            claim_Scores = new ArrayList<Double>();
+            claim_Scores_List = new ArrayList<Double>();
+            
             
             for(int i = 0; i<scores_for_investment[0].length; i++){
-                double sum_per_claim = 0;
+                double Hv_Score = 0;
+                double powered_hr_score = 0;
+                double powered_hr_score_sum = 0;
+                double final_claim_Score = 0;
+                
                 for(int j=0; j<scores_for_investment.length; j++){
-                    sum_per_claim += scores_for_investment[j][i]/Vs_count_List.get(j);
+                    Hv_Score += scores_for_investment[j][i]/Vs_count_List.get(j);
                 }
-                claim_Scores.add(sum_per_claim);
+                
+                //Calculate Powered Hr_Score Summation
+                double Hr_score = 0;
+                for(int k=0; k<listDataItems.get(GeneralUtils.findDataItemIndex(i)).size(); k++){
+                    ArrayList<Integer> sourceList = new ArrayList<Integer>();
+                    sourceList = GeneralUtils.sourceListforClaims(listDataItems.get(GeneralUtils.findDataItemIndex(i)).get(k)/*, scores_for_investment*/);
+                    for(int m=0; m<sourceList.size(); m++){
+                        Hr_score += To_S.get(m)/sourceList.size();
+                    }
+                    powered_hr_score = Math.pow(Hr_score, 1.4);
+                    powered_hr_score_sum += powered_hr_score;
+                }
+                final_claim_Score = Hv_Score * (Math.pow(Hv_Score, 1.4) /powered_hr_score_sum);
+                
+                claim_Scores_List.add(final_claim_Score);
                 for(int j=0; j<scores_for_investment.length; j++){
-                    scores_for_investment[j][i] =  sum_per_claim;
-                } 
+                    scores_for_investment[j][i] =  final_claim_Score;
+                }
+                
             }
             
            System.out.println("Iteration: "+iter);
-           System.out.println("Source Scores: "+source_Scores);
-           System.out.println("Claim Scores: "+claim_Scores);
+           System.out.println("Source Scores: "+source_Scores_List);
+           System.out.println("Claim Scores: "+claim_Scores_List);
             
            iter++;
         }
         
-        GeneralUtils.showOrderedSources(source_Scores);
-        GeneralUtils.showOrderedClaims(claim_Scores);   
+        GeneralUtils.showOrderedSources(source_Scores_List);
+        GeneralUtils.showOrderedClaims(claim_Scores_List); 
+        GeneralUtils.showClaimsPerDataItems(claim_Scores_List);
        
        
    } 

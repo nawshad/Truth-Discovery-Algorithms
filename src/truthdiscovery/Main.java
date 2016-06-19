@@ -7,13 +7,7 @@ package truthdiscovery;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.Set;
 import utils.GeneralUtils;
-import utils.MatrixOps;
 
 /**
  *
@@ -24,7 +18,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static int TopK = 7;
-    public static int totalIter = 3;
+    public static int totalIter = 20;
     public static ArrayList<String> sourceList = new ArrayList<String>();
     public static ArrayList<String> claimList = new ArrayList<String>(); 
 
@@ -114,12 +108,13 @@ public class Main {
         //Sum and AvgLog
         
         boolean isAvgLog = false;
-        //Sum.SumFactFinder(factor, isAvgLog);
+        Sum.SumFactFinder(factor, isAvgLog);
         isAvgLog = true;// Enable Avg Log
-        //Sum.SumFactFinder(factor, isAvgLog);
+        Sum.SumFactFinder(factor, isAvgLog);
         
         //Investment
-        //Investment.investmentCalculation();
+        Investment.investmentCalculation();
+        //GeneralUtils.showMatrix(scores);
         Investment.pooledInvestmentCalculation();
         
     }

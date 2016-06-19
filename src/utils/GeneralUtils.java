@@ -11,6 +11,7 @@ import java.util.LinkedHashSet;
 import static truthdiscovery.Main.Sv_count_List;
 import static truthdiscovery.Main.claimList;
 import static truthdiscovery.Main.listDataItems;
+import static truthdiscovery.Main.scores;
 import static truthdiscovery.Main.sourceList;
 
 /**
@@ -41,7 +42,7 @@ public class GeneralUtils {
     }
     
     //Given a claim id finds out all the sources that are claiming it and returns as an ArrayList
-    public static ArrayList<Integer> sourceListforClaims(int claimIndex, double[][] scores){
+    public static ArrayList<Integer> sourceListforClaims(int claimIndex/*, double[][] scores*/){
         ArrayList<Integer> sourceList = new ArrayList<Integer>();
         for(int i=0; i<scores[0].length; i++){
             for (int j=0; j<scores.length; j++){
@@ -89,6 +90,59 @@ public class GeneralUtils {
         }
         System.out.println(confidentClaims);
 
+    }
+    
+    public static void showMatrix(double[][] matrix){
+        for(int i=0; i<matrix.length; i++){
+            for(int j=0; j<matrix[i].length; j++){
+                System.out.print(matrix[i][j]+"\t");
+            }
+            System.out.println();
+        }
+        
+    }
+    
+    public static void showClaimsPerDataItems(ArrayList<Double> claimScore){
+        ArrayList<Double> toSortClaimScore = new ArrayList<Double>(claimScore);      
+        Collections.sort(toSortClaimScore, Collections.reverseOrder());
+        System.out.println("Sorted Claims: "+toSortClaimScore);
+        
+        ArrayList<Integer> sortedClaimIDs = new ArrayList<Integer>();
+        
+        System.out.println("Claims with most confidence (in descending order): ");
+        for(int i=0; i<toSortClaimScore.size(); i++){
+            for(int j=0; j<claimScore.size(); j++){
+                if(claimScore.get(j)==toSortClaimScore.get(i)){
+                    sortedClaimIDs.add(j);
+                }
+            } 
+        }
+        
+        //System.out.println("Sorted Claim IDs: "+sortedClaimIDs);
+        ArrayList<Integer> DataItemID = new ArrayList<Integer>();
+        
+        ArrayList<Integer> coveredDataItemIndex = new ArrayList<Integer>();
+        
+        for (int i=0; i<sortedClaimIDs.size(); i++){
+            for (int j=0; j<listDataItems.size(); j++){
+                if(coveredDataItemIndex.contains(j)){
+                    continue;
+                }
+                for(int k=0; k<listDataItems.get(j).size(); k++){
+                    if(sortedClaimIDs.get(i)==listDataItems.get(j).get(k)){
+                         if(sortedClaimIDs.get(i)==listDataItems.get(j).get(k)){  
+                             System.out.print(claimList.get(listDataItems.get(j).get(k))+" ");
+                             coveredDataItemIndex.add(j);
+                             break;
+                         }
+                    }
+                }
+            }
+
+        }
+        
+        System.out.println();
+        
     }
     
 }

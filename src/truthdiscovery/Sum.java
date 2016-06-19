@@ -109,6 +109,6 @@ public class Sum {
         
         GeneralUtils.showOrderedSources(sourceScore);
         GeneralUtils.showOrderedClaims(claimScore);
-       
+        GeneralUtils.showClaimsPerDataItems(claimScore);
     }
 }
