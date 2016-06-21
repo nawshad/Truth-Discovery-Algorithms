@@ -22,7 +22,7 @@ Except the last three algorithms, all the other ones converges in a few interati
 
 * ***Cosine***: Converged after too many (5000) iteration.
 
-* ***Two Estimates***: Doesn't converge. Source and Claims both oscilates in two sets of results. Need to revisit.
+* ***Two Estimates***: Doesn't converge. Source and Claims both oscilates in two sets of results. 
 
 * ***Three Estimates***: Calculation breaks if Ts_0 = 1 is used. Claims converges, though Sources don't converge rather oscilates between two sets of results.
 
