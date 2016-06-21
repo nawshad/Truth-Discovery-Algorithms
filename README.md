@@ -19,17 +19,17 @@ The data provided in the book, has three data items, such as, presidents of US, 
 Except the last three algorithms, all the other ones converges in a few interations, (i.e. Source and Claim values becom fixed). At this version, convergence checking and breaking out the loop is not important because more emphasis was provided on implementing algorithms and testing manually with different number of iterations.
 
 - Avg Log 
---This algorithm has some issues when a source has exactly one value/claim. The 10 based logarithm returns 0 result for such a scinario.
+- -This algorithm has some issues when a source has exactly one value/claim. The 10 based logarithm returns 0 result for such a scinario.
 
 - Cosine 
---Converged after too many (5000) iteration.
+- -Converged after too many (5000) iteration.
 
 - Two Estimates
---Doesn't converge. Source and Claims both oscilates in two sets of results. Need to revisit.
+- -Doesn't converge. Source and Claims both oscilates in two sets of results. Need to revisit.
 
-- Three Estimates: 
---Calculation breaks if Ts_0 = 1 is used.
---Claims converges, though Sources don't converge rather oscilates between two sets of results.
+- Three Estimates 
+- -Calculation breaks if Ts_0 = 1 is used.
+- -Claims converges, though Sources don't converge rather oscilates between two sets of results.
 
  ### How do I get set up? ###
 
@@ -51,6 +51,7 @@ arg1 can take value 1 to 9. Following are the argument values corresponding to d
 
 * Suggestions on removing code smells:
 You are more than welcome to suggest me on how to remove code smells from the code.
+
 * Code review: 
 Any suggestions on better coding is much appreciated.
 
