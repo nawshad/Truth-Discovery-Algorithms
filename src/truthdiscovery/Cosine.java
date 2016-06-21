@@ -15,20 +15,20 @@ import utils.GeneralUtils;
  * @author nawshad
  */
 public class Cosine {
-    public static void cosineFunctionCalculation(){
+    public static void cosineFunctionCalculation(double Ts_0_value, double Cv_0_value, int totalIter){
          
          //init To_S;
-        double source_init_value = 0.8;
-        ArrayList<Double> To_S = new ArrayList<Double>();
+        double source_init_value = Ts_0_value;
+        ArrayList<Double> Ts_0 = new ArrayList<Double>();
         for(int i=0; i<scores.length; i++){
-            To_S.add(source_init_value);
+            Ts_0.add(source_init_value);
         } 
         
         //init claim
-        double claim_init_value = 1;
-        ArrayList<Double> Co_V = new ArrayList<Double>();
+        double claim_init_value = Cv_0_value;
+        ArrayList<Double> Cv_0 = new ArrayList<Double>();
         for(int i=0; i<scores[0].length; i++){
-            Co_V.add(source_init_value);
+            Cv_0.add(source_init_value);
         } 
         
         //Calculate source scores
@@ -43,13 +43,13 @@ public class Cosine {
                 double negative = 0;
                 double norm = 0;
                 double length_V_Ds = 0;
-                double prev_source_score = To_S.get(i);
+                double prev_source_score = Ts_0.get(i);
                 ArrayList<Integer> positiveClaimListforSource = new ArrayList<Integer>();
                 ArrayList<Integer> negativeClaimListforSource = new ArrayList<Integer>();
 
                 for(int j=0; j<scores[i].length; j++){      
                     if(scores[i][j] == 1){
-                        positive += Co_V.get(j);
+                        positive += Cv_0.get(j);
                         positiveClaimListforSource.add(j);
                     }
                 }
@@ -63,7 +63,7 @@ public class Cosine {
 
                 //negative score calculation
                 for(int l=0; l<negativeClaimListforSource.size(); l++){
-                    negative += Co_V.get(negativeClaimListforSource.get(l));
+                    negative += Cv_0.get(negativeClaimListforSource.get(l));
                 }
 
                 //length of V_Ds 
@@ -72,7 +72,7 @@ public class Cosine {
                 //calculate sum of all claims
                 double sum_Cv = 0;
                 for(int m=0; m<GeneralUtils.claimsListforDataItemGivenSourceID(i).size(); m++){
-                    sum_Cv += Co_V.get(GeneralUtils.claimsListforDataItemGivenSourceID(i).get(m));
+                    sum_Cv += Cv_0.get(GeneralUtils.claimsListforDataItemGivenSourceID(i).get(m));
                 }
 
                 double sum_Cv_sq = Math.pow(sum_Cv, 2);
@@ -83,7 +83,7 @@ public class Cosine {
                 //save in a arrayList
             }
 
-            System.out.println("Source Scores: "+sourceScores);
+            //System.out.println("Source Scores: "+sourceScores);
 
             //claim Score calculation
             
@@ -96,7 +96,7 @@ public class Cosine {
             for(int i=0; i<scores[0].length;i++){
                 //find out source list for that claim ID
                 for(int j=0; j<GeneralUtils.sourceListforClaims(i).size(); j++){
-                    positive += Math.pow(To_S.get(GeneralUtils.sourceListforClaims(i).get(j)), 3);
+                    positive += Math.pow(Ts_0.get(GeneralUtils.sourceListforClaims(i).get(j)), 3);
                 }
                 
                 //negative lists
@@ -108,7 +108,7 @@ public class Cosine {
                 }
             
                 for(int m=0; m<negativeSourceList.size(); m++){
-                    negative += Math.pow(To_S.get(negativeSourceList.get(m)), 3);
+                    negative += Math.pow(Ts_0.get(negativeSourceList.get(m)), 3);
                 }
                 
                 //sum scores for all sources of data items pointed by a claim
@@ -121,21 +121,23 @@ public class Cosine {
 
                 
                 for (int q=0; q<allSourceListforClaim.size(); q++){
-                    norm += Math.pow(To_S.get(allSourceListforClaim.get(q)),3);
+                    norm += Math.pow(Ts_0.get(allSourceListforClaim.get(q)),3);
                 }
                 
                 claim_score = (positive - negative) / norm;
                 claimScores.add(claim_score);
                 
             }
-            Co_V = claimScores;
-            To_S = sourceScores;
+            Cv_0 = claimScores;
+            Ts_0 = sourceScores;
+            
+            System.out.println("\nIteration: "+iter);
             
             GeneralUtils.showOrderedSources(sourceScores);
             GeneralUtils.showOrderedClaims(claimScores);
             GeneralUtils.showClaimsPerDataItems(claimScores);
 
-            System.out.println("Claim Values: "+claimScores);
+            //System.out.println("Claim Values: "+claimScores);
 
             iter++;
         }

@@ -15,21 +15,18 @@ import utils.GeneralUtils;
  * @author nawshad
  */
 public class TwoEstimates {
-    public static void twoEstimatesFunction(){
-        ArrayList<Double> To_S = new ArrayList<Double>(); 
-        double init_value = 0.8;
+    public static void twoEstimatesFunction(double Ts_0_value, int totalIter){
+        ArrayList<Double> Ts_0 = new ArrayList<Double>(); 
+        double init_value = Ts_0_value;
         for(int i=0; i<scores.length; i++){
-            To_S.add(init_value);
+            Ts_0.add(init_value);
         }
         
-        int totalIter = 1;
-        
+        //int totalIter = 400;
         int iter = 0;
         while (iter < totalIter){
-            //ArrayList<Double> claimScores = new ArrayList<Double>();
-            ArrayList<Double> sourceScores = new ArrayList<Double>();
             //claim Score calculation
-            //posiive, negative, norm
+            //positive, negative, norm
             double positive = 0;
             double negative = 0;
             double norm = 0;
@@ -39,9 +36,8 @@ public class TwoEstimates {
             for(int i=0; i<scores[0].length;i++){
                 //find out source list for that claim ID
                 for(int j=0; j<GeneralUtils.sourceListforClaims(i).size(); j++){
-                    positive += To_S.get(GeneralUtils.sourceListforClaims(i).get(j));
+                    positive += Ts_0.get(GeneralUtils.sourceListforClaims(i).get(j));
                 }
-
                 //negative lists
                 ArrayList<Integer> negativeSourceList = new ArrayList<Integer>();
                 for(int k=0; k<GeneralUtils.sourceListforDataItem(i).size(); k++){
@@ -51,9 +47,9 @@ public class TwoEstimates {
                     }
                 }
 
-                System.out.println("For claim("+i+"): Negative Source List: "+ negativeSourceList);               
+                //System.out.println("For claim("+i+"): Negative Source List: "+ negativeSourceList);               
                 for(int m=0; m<negativeSourceList.size(); m++){
-                    negative += To_S.get(negativeSourceList.get(m));
+                    negative += Ts_0.get(negativeSourceList.get(m));
                 }
 
                 //sum scores for all sources of data items pointed by a claim
@@ -70,15 +66,16 @@ public class TwoEstimates {
             }
 
             //System.out.println("Claim Scores: "+Cv);
-
-            //Source Score 
+            
+            //Source Score calculation
+            ArrayList<Double> sourceScores = new ArrayList<Double>();
             positive = 0;
             negative = 0;
             norm = 0;
             double source_score = 0;
             for(int i=0;i<scores.length; i++){
                 double length_V_Ds = 0;
-                double prev_source_score = To_S.get(i);
+                double prev_source_score = Ts_0.get(i);
                 ArrayList<Integer> positiveClaimListforSource = new ArrayList<Integer>();
                 ArrayList<Integer> negativeClaimListforSource = new ArrayList<Integer>();
 
@@ -106,17 +103,17 @@ public class TwoEstimates {
 
             }
             
-            To_S = sourceScores;
+            Ts_0 = sourceScores;
             //Cv = claimScores; 
             
-            System.out.println("Iter: "+iter);
+            System.out.println("\nIteration: "+iter);
             
-            /*GeneralUtils.showOrderedSources(sourceScores);
+            GeneralUtils.showOrderedSources(sourceScores);
             GeneralUtils.showOrderedClaims(Cv);
             GeneralUtils.showClaimsPerDataItems(Cv);
             
-            System.out.println("Source Scores: "+sourceScores);
-            System.out.println("Claim Scores: "+Cv);*/
+            //System.out.println("Source Scores: "+sourceScores);
+            //System.out.println("Claim Scores: "+Cv);
             
             iter++;
                 

@@ -17,37 +17,25 @@ import utils.GeneralUtils;
  * @author nawshad
  */
 public class TruthFinder {
-    public static void truthFinderFunction(){
+    public static void truthFinderFunction(double Ts_0_value){
         //init To_S;
-       double source_init_value = 0.8;
-       ArrayList<Double> To_S = new ArrayList<Double>();
+       double source_init_value = Ts_0_value;
+       ArrayList<Double> Ts_0 = new ArrayList<Double>();
         for(int i=0; i<scores.length; i++){
-            To_S.add(source_init_value);
+            Ts_0.add(source_init_value);
         } 
 
-       //Copy scores matrix 
-       
-        //GeneralUtils.showMatrix(scores);
-        
-        double [][] copy_scores_for_truthfinder = new double[7][7];
-        
-        for(int i = 0; i<copy_scores_for_truthfinder.length; i++){
-            for (int j=0; j<copy_scores_for_truthfinder[i].length; j++){
-                copy_scores_for_truthfinder[i][j] = scores[i][j];
-            }
-        }
-        
         int iter = 0;
         
         while(iter < totalIter){
             ArrayList<Double> claimScores = new ArrayList<Double>(); 
             System.out.println("Iteration:"+iter);
             
-            for(int i=0; i<copy_scores_for_truthfinder.length; i++){
+            for(int i=0; i<scores.length; i++){
                 double claim_Score = 0;
-                for(int j=0; j<copy_scores_for_truthfinder[i].length; j++){
-                    if(copy_scores_for_truthfinder[j][i]>0){
-                        claim_Score += -(Math.log(1-To_S.get(j)));
+                for(int j=0; j<scores[i].length; j++){
+                    if(scores[j][i] == 1){
+                        claim_Score += -(Math.log(1-Ts_0.get(j)));
                     }
                 }
                 claimScores.add(claim_Score);
@@ -55,21 +43,12 @@ public class TruthFinder {
 
             System.out.println("ClaimScores:"+claimScores);
 
-            //Update the matrix with this score;
-            /*for(int i=0; i<copy_scores_for_truthfinder.length; i++){
-                for(int j=0; j<copy_scores_for_truthfinder[i].length; j++){
-                    if(scores[j][i] > 0){
-                       copy_scores_for_truthfinder[j][i] = claimScores.get(i);
-                    }
-                }
-
-            }*/
 
             ArrayList<Double> sourceScores = new ArrayList<Double>();
-            for(int i=0; i<copy_scores_for_truthfinder.length; i++){
+            for(int i=0; i<scores.length; i++){
                 double sum_per_source = 0;
-                for(int j=0; j<copy_scores_for_truthfinder[i].length; j++){
-                    if(copy_scores_for_truthfinder[i][j]>0){
+                for(int j=0; j<scores[i].length; j++){
+                    if(scores[i][j] == 1){
                         sum_per_source += (1 - Math.exp(-gamma*(claimScores.get(j)/*copy_scores_for_truthfinder[i][j])*/)));
                     }
                 }
@@ -79,14 +58,10 @@ public class TruthFinder {
             
             
             System.out.println("Scource Scores: "+sourceScores);
-            
-            /*for(int i=0; i<copy_scores_for_truthfinder.length; i++){
-                for(int j=0; j<copy_scores_for_truthfinder[i].length; j++){ 
-                    if(copy_scores_for_truthfinder[i][j]>0) copy_scores_for_truthfinder[i][j] = sourceScores.get(i); 
-                }
-            }*/
 
-            To_S = sourceScores;
+            Ts_0 = sourceScores;
+            
+            System.out.println("\nIteration: " +iter);
             
             GeneralUtils.showOrderedSources(sourceScores);
             GeneralUtils.showOrderedClaims(claimScores);

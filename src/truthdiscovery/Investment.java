@@ -19,12 +19,12 @@ import utils.GeneralUtils;
  * @author nawshad
  */
 public class Investment {
-    public static void investmentCalculation(){     
+    public static void investmentCalculation(double Ts_0_value){     
         //init Sources
-        double init_source_value = 0.8; 
-        ArrayList<Double> To_S = new ArrayList<Double>();
+        double init_source_value = Ts_0_value; 
+        ArrayList<Double> Ts_0 = new ArrayList<Double>();
         for(int i=0; i<scores.length; i++){
-            To_S.add(init_source_value);
+            Ts_0.add(init_source_value);
         }
          
         //init values for claims
@@ -37,7 +37,7 @@ public class Investment {
             double Sv_Length = Sv_count_List.get(i);
             double S_Ds_Length = GeneralUtils.sourceListforDataItem(GeneralUtils.findDataItemIndex(i)).size();
             Co = (Sv_Length/S_Ds_Length);
-            System.out.println(Co);
+            //System.out.println(Co);
             Co_V.add(Co);
         }
         
@@ -52,12 +52,12 @@ public class Investment {
                 double sum_of_avg_Ts = 0;
                 for (int j=0; j<scores[i].length; j++){
                     if(scores[i][j] == 1){
-                        multiply_Cv_Ts = Co_V.get(j) * To_S.get(i);        
+                        multiply_Cv_Ts = Co_V.get(j) * Ts_0.get(i);        
                         //Find the source list of this claim
                         for(int k=0; k<GeneralUtils.sourceListforClaims(j).size(); k++){
                             int sourceID = GeneralUtils.sourceListforClaims(j).get(k);
                             //find T_score for that sourceID
-                            double Ts = To_S.get(sourceID);
+                            double Ts = Ts_0.get(sourceID);
                             //divide it by that sources total claim count
                             double avg_Ts = Ts/Vs_count_List.get(sourceID);
                             sum_of_avg_Ts += avg_Ts; 
@@ -70,8 +70,8 @@ public class Investment {
                 sourceScores.add(source_score);  
             }
 
-            System.out.println("Source Scores: "+sourceScores);
-            To_S = sourceScores;
+            //System.out.println("Source Scores: "+sourceScores);
+            Ts_0 = sourceScores;
             //System.out.println("Co_V values: "+Co_V);
 
             claimScores = new ArrayList<Double>();
@@ -81,7 +81,7 @@ public class Investment {
                 double sum_avg_Ts = 0;
                 for(int j=0; j<scores[i].length; j++){
                     if(scores[j][i] == 1){
-                        double avg_Ts = To_S.get(j)/Vs_count_List.get(j);
+                        double avg_Ts = Ts_0.get(j)/Vs_count_List.get(j);
                         sum_avg_Ts += avg_Ts;
                     }
                 }
@@ -89,8 +89,10 @@ public class Investment {
                 claimScores.add(sum_claim_score);
             }
 
-            System.out.println("Claim Scores: "+claimScores);
+            //System.out.println("Claim Scores: "+claimScores);
             Co_V = claimScores;
+            
+            System.out.println("Iteration: "+iter);
             
             GeneralUtils.showOrderedSources(sourceScores);
             GeneralUtils.showOrderedClaims(claimScores);
@@ -102,12 +104,12 @@ public class Investment {
         }
    }
     
-   public static void pooledInvestmentCalculation(){
+   public static void pooledInvestmentCalculation(double Ts_0_value, int totalIter){
            //init Sources
-        double init_source_value = 0.8; 
-        ArrayList<Double> To_S = new ArrayList<Double>();
+        double init_source_value = Ts_0_value; 
+        ArrayList<Double> Ts_0 = new ArrayList<Double>();
         for(int i=0; i<scores.length; i++){
-            To_S.add(init_source_value);
+            Ts_0.add(init_source_value);
         }
          
         //init values for claims
@@ -123,7 +125,7 @@ public class Investment {
             Co_V.add(Co);
         }
         
-        System.out.println("Co_V: "+ Co_V);
+        //System.out.println("Co_V: "+ Co_V);
         
         int iter = 0;
         while(iter < totalIter){
@@ -136,12 +138,12 @@ public class Investment {
                 double sum_of_avg_Ts = 0;
                 for (int j=0; j<scores[i].length; j++){
                     if(scores[i][j] == 1){
-                        multiply_Cv_Ts = Co_V.get(j) * To_S.get(i);        
+                        multiply_Cv_Ts = Co_V.get(j) * Ts_0.get(i);        
                         //Find the source list of this claim
                         for(int k=0; k<GeneralUtils.sourceListforClaims(j).size(); k++){
                             int sourceID = GeneralUtils.sourceListforClaims(j).get(k);
                             //find T_score for that sourceID
-                            double Ts = To_S.get(sourceID);
+                            double Ts = Ts_0.get(sourceID);
                             //divide it by that sources total claim count
                             double avg_Ts = Ts/Vs_count_List.get(sourceID);
                             sum_of_avg_Ts += avg_Ts; 
@@ -154,14 +156,13 @@ public class Investment {
                 sourceScores.add(source_score);  
             }
 
-            System.out.println("Source Scores: "+sourceScores);
-            To_S = sourceScores;
+            //System.out.println("Source Scores: "+sourceScores);
+            Ts_0 = sourceScores;
             //System.out.println("Co_V values: "+Co_V);
 
             claimScores = new ArrayList<Double>();
             
             //Claim Score Calculation
-            
             double final_claim_score = 0;
             
             for(int i=0; i<scores.length; i++){
@@ -170,7 +171,7 @@ public class Investment {
                 double powered_Hr_score_sum = 0;
                 for(int j=0; j<scores[i].length; j++){
                     if(scores[j][i] == 1){
-                        double avg_Ts = To_S.get(j)/Vs_count_List.get(j);
+                        double avg_Ts = Ts_0.get(j)/Vs_count_List.get(j);
                         Hv_score += avg_Ts;
                     }  
                 }
@@ -181,7 +182,7 @@ public class Investment {
                     ArrayList<Integer> sourceList = new ArrayList<Integer>();
                     sourceList = GeneralUtils.sourceListforClaims(listDataItems.get(GeneralUtils.findDataItemIndex(i)).get(k));
                     for(int m=0; m<sourceList.size(); m++){
-                        Hr_score += To_S.get(m)/sourceList.size();
+                        Hr_score += Ts_0.get(m)/sourceList.size();
                     }
                     powered_Hr_score = Math.pow(Hr_score, 1.4);
                     powered_Hr_score_sum += powered_Hr_score;
@@ -192,6 +193,8 @@ public class Investment {
             }
             
             Co_V = claimScores;
+            
+            System.out.println("\nIteration: "+iter);
             
             GeneralUtils.showOrderedSources(sourceScores);
             GeneralUtils.showOrderedClaims(claimScores);
