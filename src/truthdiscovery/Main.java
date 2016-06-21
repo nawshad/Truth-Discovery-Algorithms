@@ -17,8 +17,9 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static int TopK = 7;
     public static int totalIter = 20;
+    public static double gamma = 0.3;
+    
     public static ArrayList<String> sourceList = new ArrayList<String>();
     public static ArrayList<String> claimList = new ArrayList<String>(); 
 
@@ -45,7 +46,7 @@ public class Main {
     public static ArrayList<Integer> Vs_count_List = new ArrayList<Integer>(); 
     //Calculating the number of sources for particular claims and store them in a list named numberSourcesforClaimsList
     public static ArrayList<Integer> Sv_count_List = new ArrayList<Integer>();
-    public static ArrayList<Double> To_S = new ArrayList<Double>();
+    //public static ArrayList<Double> To_S = new ArrayList<Double>();
        
     
     public static void main(String[] args) {
@@ -100,22 +101,36 @@ public class Main {
         double factor = 0.5; //initial claim values
         
         //Lets initialize all the source witn 0.8 scores.
-        double source_init_value = 0.8;
+        /*double source_init_value = 0.8;
         for(int i=0; i<scores.length; i++){
             To_S.add(source_init_value);
-        }
+        }*/
         
         //Sum and AvgLog
         
         boolean isAvgLog = false;
-        Sum.SumFactFinder(factor, isAvgLog);
+        factor = 0.5;
+        //Sum.SumFactFinder(factor, isAvgLog);
         isAvgLog = true;// Enable Avg Log
-        Sum.SumFactFinder(factor, isAvgLog);
+        //Sum.SumFactFinder(factor, isAvgLog);
         
         //Investment
-        Investment.investmentCalculation();
+        //Investment.investmentCalculation();
         //GeneralUtils.showMatrix(scores);
-        Investment.pooledInvestmentCalculation();
+        //Investment.pooledInvestmentCalculation();
+       //System.out.println("********************************************To_S:"+To_S);
         
+        //Truth Finder
+        //TruthFinder.truthFinderFunction();
+        
+        //System.out.println("Sources List for Claim:"+GeneralUtils.sourceListforDataItem(6));
+        
+        //System.out.println("All claims List for Data Items pointed by Source:"+GeneralUtils.claimsListforDataItemGivenSourceID(1));
+        
+        //Cosine
+        //Cosine.cosineFunctionCalculation();
+        
+        //TwoEstimates 
+        //TwoEstimates.twoEstimatesFunction();
     }
 }

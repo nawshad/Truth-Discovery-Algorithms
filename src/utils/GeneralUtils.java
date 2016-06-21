@@ -57,6 +57,40 @@ public class GeneralUtils {
         return sourceList;
     }
     
+    //given a claimID finds out all the sourcesList for a data item where the claim ID exist and returns as the list
+    public static ArrayList<Integer> sourceListforDataItem(int claimID){
+        ArrayList<Integer> sourcesListforDataItem = new ArrayList<Integer>();  
+        //find out all the data items  index where that claim exist
+        int dataItemIndex = GeneralUtils.findDataItemIndex(claimID);
+        for(int i=0; i <listDataItems.get(dataItemIndex).size(); i++){
+             ArrayList<Integer> sources = new ArrayList<Integer>();
+             sources = GeneralUtils.sourceListforClaims(listDataItems.get(dataItemIndex).get(i));
+             for(int j=0; j<sources.size(); j++){
+                 if(!sourcesListforDataItem.contains(sources.get(j))){
+                     sourcesListforDataItem.add(sources.get(j));
+                 }
+             }
+        }
+
+        return sourcesListforDataItem;
+    }
+    
+    public static ArrayList<Integer> claimsListforDataItemGivenSourceID(int SourceID){
+        ArrayList<Integer> claimsListforDataItem = new ArrayList<Integer>(); 
+       
+        //find out all the data items  index where that claim exist
+        for(int h=0; h<scores[SourceID].length; h++){
+            if(scores[SourceID][h]==1){
+                //System.out.println("h: "+h);
+                for(int i=0; i<listDataItems.get(GeneralUtils.findDataItemIndex(h)).size(); i++){
+                    claimsListforDataItem.add(listDataItems.get(GeneralUtils.findDataItemIndex(h)).get(i));   
+                }   
+            }
+        }
+        return claimsListforDataItem;
+    }
+    
+    
     public static void showOrderedSources(ArrayList<Double> sourceScore){
         ArrayList<Double> toSortSourceScore = new ArrayList<Double>(sourceScore);
         Collections.sort(toSortSourceScore, Collections.reverseOrder());
@@ -84,6 +118,7 @@ public class GeneralUtils {
         for(int i=0; i<toSortClaimScore.size(); i++){
             for(int j=0; j<claimScore.size(); j++){
                 if(claimScore.get(j)==toSortClaimScore.get(i)){
+                    //System.out.println(j);
                     confidentClaims.add(claimList.get(j));
                 }
             } 
@@ -144,5 +179,7 @@ public class GeneralUtils {
         System.out.println();
         
     }
+    
+    
     
 }
