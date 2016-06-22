@@ -10,7 +10,7 @@ This is version 1 of such code implementation by the author. This version contai
 
 ### Data and Implementation Overview ###
 
-The data provided in the book, has three data items, such as, presidents of US, France and Russia. US has two values or claims, such as Obama and Clinton, likewise, France has Hollande and Sarcozy and Russia has Putin, Yeltsin and Medvedev. There are total 7 sources which are claiming these 7 values. The relation between the sources and claims are represented as a 2D matrix, where rows are sources and columns are claims. Different helper functions have been written for truth value calculation (have a look at utils package in the source code).
+The data provided in the book, has three data items, such as, presidents of US, France and Russia. US has two values or claims, such as Obama and Clinton, likewise, France has Hollande and Sarcozy and Russia has Putin, Yeltsin and Medvedev. There are total 7 sources which are claiming these 7 values. The relation between the sources and claims are represented as a 2D matrix, where rows are sources and columns are claims. Different helper functions have been written for truth value calculation (have a look at utils package in the source code). Based on the majority voting algorithms, the most confident claims are: US->Obama, Russia->Yeltsin and France-> Hollande. The most trusted sources are: S4, S5, S6, S2, S1, S3, S7.
 
 ### Notes on Algorithms ###
 
@@ -26,7 +26,10 @@ Except the last three algorithms, all the other ones converges in a few interati
 
 * ***Three Estimates***: Calculation breaks if Ts_0 = 1 is used (as suggested in the book, Ts_0 = 0.8 is used instead). Claims converges, though Sources don't converge rather oscilates between two sets of results.
 
+Pooled investment reach convergence much earlier than investment.
+
 For Cosine, Two Estimates and Three Estimates, the source and claim scores could be normalized because in many cases the values grows much bigger and in negative range. 
+
 
 
 ### How do I get set up? ###
