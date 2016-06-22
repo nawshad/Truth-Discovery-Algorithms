@@ -26,7 +26,7 @@ Except the last three algorithms, all the other ones converges in a few interati
 
 * ***Three Estimates***: Calculation breaks if Ts_0 = 1 is used (as suggested in the book, Ts_0 = 0.8 is used instead). Claims converges, though Sources don't converge rather oscilates between two sets of results.
 
-For Cosine, Two Estimates and Three Estimates, the the source and claim scores could be normalized because in many cases the values grows much bigger and in negative range. 
+For Cosine, Two Estimates and Three Estimates, the source and claim scores could be normalized because in many cases the values grows much bigger and in negative range. 
 
 
 ### How do I get set up? ###
