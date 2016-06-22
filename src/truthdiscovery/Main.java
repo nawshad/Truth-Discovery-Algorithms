@@ -8,6 +8,7 @@ package truthdiscovery;
 import static java.lang.Thread.sleep;
 import java.util.ArrayList;
 import java.util.Arrays;
+import utils.GeneralUtils;
 
 /**
  *
@@ -149,8 +150,7 @@ public class Main {
             Vs_count_List.add(Vs);
             //System.out.println();
         }
-        //System.out.println("Vs count list:" + Vs_count_List);
-
+       
         for (int i = 0; i < scores[0].length; i++) {
             int sourceCount = 0;
             for (int j = 0; j < scores.length; j++) {
@@ -161,13 +161,18 @@ public class Main {
             Sv_count_List.add(sourceCount);
         }
         
+        System.out.println("Source-Claim realationship Matrix:");
+        GeneralUtils.showMatrix(scores);
+        
+        System.out.println("Claim counts for sources (Vs_Count) :" +Vs_count_List);
+        System.out.println("Source counts for claims (Sv_Count) :" +Sv_count_List);
+        
         double Cv_0 = 0; //initial claim values
         double Ts_0 = 0;
         double Tv_0 = 0;
         int iter = 0;
 
         switch(args[0]){
-            
             case "1":   System.out.println("\n\n**************************************************SUM*********************************************************************\n\n");
                         Thread.sleep(4000);
                         Cv_0 = 0.5;
