@@ -140,11 +140,11 @@ public class GeneralUtils {
     public static void showClaimsPerDataItems(ArrayList<Double> claimScore){
         ArrayList<Double> toSortClaimScore = new ArrayList<Double>(claimScore);      
         Collections.sort(toSortClaimScore, Collections.reverseOrder());
-        System.out.println("Sorted Claims: "+toSortClaimScore);
+        //System.out.println("Sorted Claims: "+toSortClaimScore);
         
         ArrayList<Integer> sortedClaimIDs = new ArrayList<Integer>();
         
-        System.out.println("Claims with most confidence (in descending order): ");
+        System.out.println("Claims with most confidence for each data item(in descending order): ");
         for(int i=0; i<toSortClaimScore.size(); i++){
             for(int j=0; j<claimScore.size(); j++){
                 if(claimScore.get(j)==toSortClaimScore.get(i)){

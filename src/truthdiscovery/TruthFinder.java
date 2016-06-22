@@ -39,7 +39,7 @@ public class TruthFinder {
                 claimScores.add(claim_Score);
             }
 
-            System.out.println("ClaimScores:"+claimScores);
+            //System.out.println("ClaimScores:"+claimScores);
 
             ArrayList<Double> sourceScores = new ArrayList<Double>();
             for(int i=0; i<scores.length; i++){
@@ -54,7 +54,7 @@ public class TruthFinder {
             }
             
             
-            System.out.println("Scource Scores: "+sourceScores);
+            //System.out.println("Scource Scores: "+sourceScores);
 
             Ts_0 = sourceScores;
             
