@@ -43,6 +43,9 @@ public class Sum {
                    if(scores[i][j] == 1){
                        sum += Cv_0.get(j);
                    } 
+                   if(isAvgLog){
+                        sum = ((Math.log10(Vs_count_List.get(i)))/Vs_count_List.get(i))*sum;
+                   }
                 }
                 sourceScore.add(sum);
             }
@@ -58,9 +61,6 @@ public class Sum {
                     if(scores[j][i] == 1){
                         sum += Ts_0.get(j) ;
                     }
-                }
-                if(isAvgLog){
-                    sum = ((Math.log10(Vs_count_List.get(i)))/Vs_count_List.get(i))*sum;
                 }
                 claimScore.add(sum);
             }
