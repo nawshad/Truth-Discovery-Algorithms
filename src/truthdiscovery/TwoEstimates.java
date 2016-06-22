@@ -41,7 +41,6 @@ public class TwoEstimates {
                 //negative lists
                 ArrayList<Integer> negativeSourceList = new ArrayList<Integer>();
                 for(int k=0; k<GeneralUtils.sourceListforDataItem(i).size(); k++){
-                    
                     if(!GeneralUtils.sourceListforClaims(i).contains(GeneralUtils.sourceListforDataItem(i).get(k))){
                         negativeSourceList.add(GeneralUtils.sourceListforDataItem(i).get(k));
                     }

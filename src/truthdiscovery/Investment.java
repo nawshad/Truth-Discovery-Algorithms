@@ -125,7 +125,7 @@ public class Investment {
             Cv_0.add(Co);
         }
         
-        //System.out.println("Co_V: "+ Co_V);
+        //System.out.println("Cv_0: "+ Cv_0);
         
         int iter = 0;
         while(iter < totalIter){
