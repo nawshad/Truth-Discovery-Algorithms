@@ -50,7 +50,7 @@ arg1 can take value 1 to 9. Following are the argument values corresponding to d
 * Suggestions on removing code smells:
 You are more than welcome to suggest me on how to remove code smells from the code.
 * Code review: 
-Any suggestions on better coding is much appreciated.
+Any suggestion on better coding practice and optimization of exisiting functions is much appreciated
 
 
 ### Who do I talk to? ###
