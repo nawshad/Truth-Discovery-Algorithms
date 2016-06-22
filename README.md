@@ -24,7 +24,7 @@ Except the last three algorithms, all the other ones converges in a few interati
 
 * ***Two Estimates***: Doesn't converge. Source and Claims both oscilates in two sets of results. 
 
-* ***Three Estimates***: Calculation breaks if Ts_0 = 1 is used (as suggested in the book) Ts_0 = 0.8 is used instead). Claims converges, though Sources don't converge rather oscilates between two sets of results.
+* ***Three Estimates***: Calculation breaks if Ts_0 = 1 is used (as suggested in the book) Ts_0 = 0.8 is used instead. Claims converges, though Sources don't converge rather oscilates between two sets of results.
 
 Pooled investment reach convergence much earlier than investment.
 
