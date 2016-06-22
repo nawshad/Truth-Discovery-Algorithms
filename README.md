@@ -6,7 +6,7 @@
 This repository contains the experiment code for difference truth discovery algorithms referred from [Veracity of Data: From Truth Discovery Computation Algorithms to Models of Misinformation Dynamics](http://www.morganclaypool.com/doi/abs/10.2200/S00676ED1V01Y201509DTM042). 
 
 * Version:
-This is version 1 of such code implemenatation. This version contains exact implementation of agreement based truth discovery formulae stated in the above mentioned book. 
+This is version 1 of such code implementation. This version contains exact implementation of agreement based truth discovery formulae stated in the above mentioned book. 
 
 ### Data and Implementation Overview ###
 
