@@ -175,8 +175,7 @@ public class Investment {
                         Hv_score += avg_Ts;
                     }  
                 }
-                //calculate Avg Hr Score for each each claim i, and sum them up to find the 
-                //Calculate Powered Hr_Score Summation
+                //Calculate Avg Hr Score for each claim: i, and sum them up to find the Powered Hr_Score Summation
                 double Hr_score = 0;
                 for(int k=0; k<listDataItems.get(GeneralUtils.findDataItemIndex(i)).size(); k++){
                     ArrayList<Integer> sourceList = new ArrayList<Integer>();
