@@ -20,7 +20,7 @@ Except the last three algorithms, all the other ones converges in a few interati
 
 *  ***Avg Log***: This algorithm has some issues when a source has exactly one value/claim. The 10 based logarithm returns 0 result for such a scinario.
 
-* ***Cosine***: Converged after too many (5000) iteration.
+* ***Cosine***: Converged after too many (1800) iteration.
 
 * ***Two Estimates***: Doesn't converge. Source and Claims both oscilates in two sets of results. 
 
