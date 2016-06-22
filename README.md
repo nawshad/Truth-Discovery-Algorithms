@@ -43,6 +43,7 @@ arg1 can take value 1 to 9. Following are the argument values corresponding to d
 6. Cosine
 7. Two Estimates
 8. Three Estimates
+9. Run all algorithms at once
 
 
 ### Contribution guidelines ###
