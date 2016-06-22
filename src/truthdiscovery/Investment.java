@@ -28,7 +28,7 @@ public class Investment {
         }
          
         //init values for claims
-        ArrayList<Double> Co_V = new ArrayList<Double>();
+        ArrayList<Double> Cv_0 = new ArrayList<Double>();
         ArrayList<Double> sourceScores = new ArrayList<Double>();
         ArrayList<Double> claimScores = new ArrayList<Double>();
         
@@ -38,7 +38,7 @@ public class Investment {
             double S_Ds_Length = GeneralUtils.sourceListforDataItem(GeneralUtils.findDataItemIndex(i)).size();
             Co = (Sv_Length/S_Ds_Length);
             //System.out.println(Co);
-            Co_V.add(Co);
+            Cv_0.add(Co);
         }
         
         int iter = 0;
@@ -52,7 +52,7 @@ public class Investment {
                 double sum_of_avg_Ts = 0;
                 for (int j=0; j<scores[i].length; j++){
                     if(scores[i][j] == 1){
-                        multiply_Cv_Ts = Co_V.get(j) * Ts_0.get(i);        
+                        multiply_Cv_Ts = Cv_0.get(j) * Ts_0.get(i);        
                         //Find the source list of this claim
                         for(int k=0; k<GeneralUtils.sourceListforClaims(j).size(); k++){
                             int sourceID = GeneralUtils.sourceListforClaims(j).get(k);
@@ -90,9 +90,9 @@ public class Investment {
             }
 
             //System.out.println("Claim Scores: "+claimScores);
-            Co_V = claimScores;
+            Cv_0 = claimScores;
             
-            System.out.println("Iteration: "+iter);
+            System.out.println("\nIteration: "+iter);
             
             GeneralUtils.showOrderedSources(sourceScores);
             GeneralUtils.showOrderedClaims(claimScores);
@@ -113,7 +113,7 @@ public class Investment {
         }
          
         //init values for claims
-        ArrayList<Double> Co_V = new ArrayList<Double>();
+        ArrayList<Double> Cv_0 = new ArrayList<Double>();
         ArrayList<Double> sourceScores = new ArrayList<Double>();
         ArrayList<Double> claimScores = new ArrayList<Double>();
         
@@ -122,7 +122,7 @@ public class Investment {
             double S_Ds_Length = listDataItems.get(GeneralUtils.findDataItemIndex(i)).size();
             Co = (1/S_Ds_Length);
             //System.out.println(Co);
-            Co_V.add(Co);
+            Cv_0.add(Co);
         }
         
         //System.out.println("Co_V: "+ Co_V);
@@ -138,7 +138,7 @@ public class Investment {
                 double sum_of_avg_Ts = 0;
                 for (int j=0; j<scores[i].length; j++){
                     if(scores[i][j] == 1){
-                        multiply_Cv_Ts = Co_V.get(j) * Ts_0.get(i);        
+                        multiply_Cv_Ts = Cv_0.get(j) * Ts_0.get(i);        
                         //Find the source list of this claim
                         for(int k=0; k<GeneralUtils.sourceListforClaims(j).size(); k++){
                             int sourceID = GeneralUtils.sourceListforClaims(j).get(k);
@@ -192,7 +192,7 @@ public class Investment {
                 
             }
             
-            Co_V = claimScores;
+            Cv_0 = claimScores;
             
             System.out.println("\nIteration: "+iter);
             
