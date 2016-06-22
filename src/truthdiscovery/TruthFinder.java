@@ -25,11 +25,9 @@ public class TruthFinder {
             Ts_0.add(source_init_value);
         } 
 
-        int iter = 0;
-        
+        int iter = 0;    
         while(iter < totalIter){
             ArrayList<Double> claimScores = new ArrayList<Double>(); 
-            System.out.println("Iteration:"+iter);
             
             for(int i=0; i<scores.length; i++){
                 double claim_Score = 0;
@@ -42,7 +40,6 @@ public class TruthFinder {
             }
 
             System.out.println("ClaimScores:"+claimScores);
-
 
             ArrayList<Double> sourceScores = new ArrayList<Double>();
             for(int i=0; i<scores.length; i++){

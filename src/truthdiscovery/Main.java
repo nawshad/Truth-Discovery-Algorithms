@@ -212,7 +212,7 @@ public class Main {
             case "6" :  System.out.println("\n\n***************************************************COSINE****************************************************************\n\n");
                         Thread.sleep(4000);
                         //Cosine
-                        //Converges after 5000 iteration
+                        //Converges after ~2500 iteration
                         iter = 2500;
                         Ts_0 = 0.8;
                         Cv_0 = 1;
