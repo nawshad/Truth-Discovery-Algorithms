@@ -87,7 +87,7 @@ public class Main {
         System.out.println("\n\n**************************COSINE****************************************************************\n\n");
         //Cosine
         //Converges after 5000 iteration
-        iter = 5000;
+        iter = 2500;
         Ts_0 = 0.8;
         Cv_0 = 1;
         Cosine.cosineFunctionCalculation(Ts_0, Cv_0, iter);
@@ -208,7 +208,7 @@ public class Main {
                         Thread.sleep(4000);
                         //Cosine
                         //Converges after 5000 iteration
-                        iter = 5000;
+                        iter = 2500;
                         Ts_0 = 0.8;
                         Cv_0 = 1;
                         Cosine.cosineFunctionCalculation(Ts_0, Cv_0, iter);
