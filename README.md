@@ -6,7 +6,7 @@
 This repository contains the experiment code for different truth discovery algorithms referred from [Veracity of Data: From Truth Discovery Computation Algorithms to Models of Misinformation Dynamics](http://www.morganclaypool.com/doi/abs/10.2200/S00676ED1V01Y201509DTM042). 
 
 * Version:
-This is version 1 of such code implementation. This version contains exact implementation of agreement based truth discovery formulae stated in the above mentioned book. 
+This is version 1 of such code implementation by the author. This version contains exact implementation of agreement based truth discovery formulae stated in the above mentioned book. 
 
 ### Data and Implementation Overview ###
 
@@ -14,7 +14,7 @@ The data provided in the book, has three data items, such as, presidents of US, 
 
 ### Notes on Algorithms ###
 
-The following observation can be made from this version implementation (this may subject to change later based on further code refactoring and fixing bugs in future). 
+The following observation can be made from this version of implementation (this may subject to change later based on further code refactoring and fixing bugs). 
 
 Except the last three algorithms, all the other ones converges in a few interations, (i.e. Source and Claim values becom fixed). At this version, convergence checking and breaking out the loop is not important because more emphasis was provided on implementing algorithms and testing manually with different number of iterations.
 
@@ -50,7 +50,7 @@ arg1 can take value 1 to 9. Following are the argument values corresponding to d
 * Suggestions on removing code smells:
 You are more than welcome to suggest me on how to remove code smells from the code.
 * Code review: 
-Any suggestion on better coding practice and optimization of exisiting functions is much appreciated
+Any suggestion on better coding practice and optimization of exisiting functions is much appreciated.
 
 
 ### Who do I talk to? ###
