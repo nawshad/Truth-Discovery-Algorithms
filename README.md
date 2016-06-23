@@ -16,7 +16,7 @@ The data provided in the book, has three data items, such as, presidents of US, 
 
 The following observation can be made from this version of implementation (this may subject to change later based on further code refactoring and fixing bugs). 
 
-Except the last three algorithms, all the other ones converges in a few interations, (i.e. Source and Claim values becom fixed). At this version, convergence checking and breaking out the loop is not important because more emphasis was provided on implementing algorithms and testing manually with different number of iterations.
+Except the last three algorithms, all the other ones converges in a few interations, (i.e. Source and Claim values become fixed). At this version, convergence checking and breaking out the loop is not important because more emphasis was provided on implementing algorithms and testing manually with different number of iterations.
 
 *  ***Avg Log***: This algorithm has some issues when a source has exactly one value/claim. The 10 based logarithm returns 0 result for such a scinario.
 
