@@ -8,6 +8,7 @@ package truthdiscovery;
 import static java.lang.Thread.sleep;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import utils.GeneralUtils;
 
 /**
@@ -175,7 +176,7 @@ public class Main {
         switch(args[0]){
             case "1":   System.out.println("\n\n**************************************************SUM*********************************************************************\n\n");
                         Thread.sleep(4000);
-                        Cv_0 = 0.5;
+                        Cv_0 = 1;
                         boolean isAvgLog = false;
                         Sum.SumFactFinder(Cv_0, isAvgLog);
                         break;
@@ -246,6 +247,21 @@ public class Main {
                 
             default:  System.out.println("Wrong Choice");
         }
+        
+        /*LinkedHashSet<String> lhs1 = new LinkedHashSet<String>();
+        LinkedHashSet<String> lhs2 = new LinkedHashSet<String>();
+            
+        lhs1.add("S1");
+        lhs1.add("S2");
+        System.out.println("First Set:"+lhs1);
+        
+        
+        lhs2.add("S1");
+        lhs2.add("S2");
+        System.out.println("Second Set:"+lhs2);
+        
+        System.out.println("Equal?: "+lhs1.equals(lhs2)+":"+GeneralUtils.isSameSet(lhs1, lhs2));*/
+        
         
     }
 }

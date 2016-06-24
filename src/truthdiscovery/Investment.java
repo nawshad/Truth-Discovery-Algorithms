@@ -98,9 +98,7 @@ public class Investment {
             GeneralUtils.showOrderedClaims(claimScores);
             GeneralUtils.showClaimsPerDataItems(claimScores);
             
-            iter++;
-            
-               
+            iter++;     
         }
    }
     

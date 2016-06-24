@@ -7,6 +7,7 @@ package utils;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import static truthdiscovery.Main.Sv_count_List;
 import static truthdiscovery.Main.claimList;
@@ -91,13 +92,13 @@ public class GeneralUtils {
     }
     
     
-    public static void showOrderedSources(ArrayList<Double> sourceScore){
+    public static LinkedHashSet<String> showOrderedSources(ArrayList<Double> sourceScore){
         ArrayList<Double> toSortSourceScore = new ArrayList<Double>(sourceScore);
         Collections.sort(toSortSourceScore, Collections.reverseOrder());
-        System.out.println("Sorted Sources: "+toSortSourceScore);
+        //System.out.println("Sorted Sources: "+toSortSourceScore);
         LinkedHashSet<String> trustedSources = new LinkedHashSet<String>();
         
-        System.out.println("Sources with most trust (in descending order): ");
+        //System.out.println("Sources with most trust (in descending order): ");
         for(int i=0; i<toSortSourceScore.size(); i++){
                 for(int j=0; j<sourceScore.size(); j++){
                     if(sourceScore.get(j)==toSortSourceScore.get(i)){
@@ -105,16 +106,17 @@ public class GeneralUtils {
                 }  
             }   
         }
-        System.out.println(trustedSources);
+        //System.out.println(trustedSources);
+        return trustedSources;
     }
     
-    public static void showOrderedClaims(ArrayList<Double> claimScore){
+    public static LinkedHashSet<String> showOrderedClaims(ArrayList<Double> claimScore){
         ArrayList<Double> toSortClaimScore = new ArrayList<Double>(claimScore);      
         Collections.sort(toSortClaimScore, Collections.reverseOrder());
-        System.out.println("Sorted Claims: "+toSortClaimScore);
+        //System.out.println("Sorted Claims: "+toSortClaimScore);
         LinkedHashSet<String> confidentClaims = new LinkedHashSet<String>();
           
-        System.out.println("Claims with most confidence (in descending order): ");
+        //System.out.println("Claims with most confidence (in descending order): ");
         for(int i=0; i<toSortClaimScore.size(); i++){
             for(int j=0; j<claimScore.size(); j++){
                 if(claimScore.get(j)==toSortClaimScore.get(i)){
@@ -123,7 +125,8 @@ public class GeneralUtils {
                 }
             } 
         }
-        System.out.println(confidentClaims);
+        //System.out.println(confidentClaims);
+        return confidentClaims;
 
     }
     
@@ -165,21 +168,40 @@ public class GeneralUtils {
                 }
                 for(int k=0; k<listDataItems.get(j).size(); k++){
                     if(sortedClaimIDs.get(i)==listDataItems.get(j).get(k)){
-                         if(sortedClaimIDs.get(i)==listDataItems.get(j).get(k)){  
-                             System.out.print(claimList.get(listDataItems.get(j).get(k))+" ");
-                             coveredDataItemIndex.add(j);
-                             break;
-                         }
+                        if(sortedClaimIDs.get(i)==listDataItems.get(j).get(k)){  
+                            System.out.print(claimList.get(listDataItems.get(j).get(k))+" ");
+                            coveredDataItemIndex.add(j);
+                            break;
+                        }
                     }
                 }
             }
-
         }
-        
-        System.out.println();
-        
+        System.out.println();   
     }
     
-    
-    
+    //Compares two linked hash sets based on the elements it has in a certain order.
+    public static boolean isSameSet(LinkedHashSet<String> lsh1, LinkedHashSet<String> lsh2){
+        boolean is_same = true;
+        
+        Iterator it1 = lsh1.iterator();
+        Iterator it2 = lsh2.iterator();
+        
+        String value1, value2;
+        
+        if(lsh1.isEmpty()){
+            is_same = false;
+        }
+        
+        while(it1.hasNext() && it2.hasNext()){
+            value1 = it1.next().toString();
+            value2 = it2.next().toString();
+            if(value1!=value2){
+                is_same = false;
+            }
+        }
+        
+        return is_same;
+    }
+
 }
