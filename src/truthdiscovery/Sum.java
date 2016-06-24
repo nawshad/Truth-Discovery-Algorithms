@@ -32,13 +32,9 @@ public class Sum {
        ArrayList<Double> claimScore = new ArrayList<Double>(); 
        ArrayList<Double> Ts_0 = new ArrayList<Double>();
        
-       /*double init_source_value = 1; 
-       for(int i=0; i<scores[0].length; i++){
-           Ts_0.add(init_claim_value);
-       }*/
         
        int iter = 0; 
-       while(iter< totalIter){
+       while(true){
            sourceScore = new ArrayList<Double>();
            claimScore = new ArrayList<Double>();
            

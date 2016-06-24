@@ -176,7 +176,7 @@ public class Main {
         switch(args[0]){
             case "1":   System.out.println("\n\n**************************************************SUM*********************************************************************\n\n");
                         Thread.sleep(4000);
-                        Cv_0 = 1;
+                        Cv_0 = 0.5;
                         boolean isAvgLog = false;
                         Sum.SumFactFinder(Cv_0, isAvgLog);
                         break;
