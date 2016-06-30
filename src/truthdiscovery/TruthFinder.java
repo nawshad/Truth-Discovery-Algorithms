@@ -54,14 +54,16 @@ public class TruthFinder {
             }
             
             
-            //System.out.println("Scource Scores: "+sourceScores);
+           
 
             Ts_0 = sourceScores;
             
             System.out.println("\nIteration: " +iter);
             
-            GeneralUtils.showOrderedSources(sourceScores);
-            GeneralUtils.showOrderedClaims(claimScores);
+            System.out.println("Ordered Sources:"+GeneralUtils.showOrderedSources(sourceScores));
+            System.out.println("Ordered Claims:"+GeneralUtils.showOrderedClaims(claimScores));
+            System.out.println("Scource Scores: "+sourceScores);
+            System.out.println("Claim Scores: "+claimScores);
             GeneralUtils.showClaimsPerDataItems(claimScores);
             
             iter++;

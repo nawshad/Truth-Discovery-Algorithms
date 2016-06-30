@@ -28,15 +28,15 @@ public class Sum {
            Cv_0.add(init_claim_value);
        }
        //Source score calculation 
-       ArrayList<Double> sourceScore = new ArrayList<Double>();
-       ArrayList<Double> claimScore = new ArrayList<Double>(); 
+       ArrayList<Double> sourceScores = new ArrayList<Double>();
+       ArrayList<Double> claimScores = new ArrayList<Double>(); 
        ArrayList<Double> Ts_0 = new ArrayList<Double>();
        
         
        int iter = 0; 
-       while(true){
-           sourceScore = new ArrayList<Double>();
-           claimScore = new ArrayList<Double>();
+       while(iter <totalIter){
+           sourceScores = new ArrayList<Double>();
+           claimScores = new ArrayList<Double>();
            
            //Source score calculation
             for(int i=0; i<scores.length; i++){
@@ -51,7 +51,7 @@ public class Sum {
                    }
                 }
                 //System.out.println("Sum:" +sum);
-                sourceScore.add(sum);
+                sourceScores.add(sum);
             }
             
             //ArrayList<Double> Ts_0 = new ArrayList<Double>();
@@ -66,29 +66,26 @@ public class Sum {
                  double sum = 0;     
                  for(int j=0; j<scores[i].length; j++){
                      if(scores[j][i] == 1){
-                         sum += sourceScore.get(j) ;
+                         sum += sourceScores.get(j) ;
                      }
                  }
-                 claimScore.add(sum);
+                 claimScores.add(sum);
              }
             
             System.out.println("\nIteration:"+iter);
-            
-            System.out.println("Source Scores: "+sourceScore);
-            System.out.println("Ordered Source: "+GeneralUtils.showOrderedSources(sourceScore));
-            
-            System.out.println("Claim Score: "+claimScore);
-            System.out.println("Ordered Claims: "+GeneralUtils.showOrderedClaims(claimScore));
-            GeneralUtils.showClaimsPerDataItems(claimScore);
-            
            
+            System.out.println("Ordered Source: "+GeneralUtils.showOrderedSources(sourceScores));
+            System.out.println("Ordered Claims: "+GeneralUtils.showOrderedClaims(claimScores));
+            System.out.println("Source Scores: "+sourceScores);
+            System.out.println("Claim Score: "+claimScores);
+            GeneralUtils.showClaimsPerDataItems(claimScores);
             
-            if(GeneralUtils.isSameSet(GeneralUtils.showOrderedSources(Ts_0),GeneralUtils.showOrderedSources(sourceScore))){
+            /*if(GeneralUtils.isSameSet(GeneralUtils.showOrderedSources(Ts_0),GeneralUtils.showOrderedSources(sourceScores))){
                 break;
-            };
+            };*/
             
-            Cv_0 = claimScore;
-            Ts_0 = sourceScore;
+            Cv_0 = claimScores;
+            Ts_0 = sourceScores;
             
             iter++;
         }  

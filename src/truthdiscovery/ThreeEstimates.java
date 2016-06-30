@@ -114,8 +114,6 @@ public class ThreeEstimates {
 
             }
             
-            //System.out.println("Tv Scores: "+Tv);
-            
             //Ts calculation
             ArrayList<Double> Ts = new ArrayList<Double>();
             positive = 0;
@@ -151,13 +149,16 @@ public class ThreeEstimates {
 
             }
             
-            //System.out.println("Ts Scores: "+Ts);
+            
             Ts_0 = Ts;
             
             System.out.println("\nIteration: "+iter);
             
-            GeneralUtils.showOrderedSources(Ts);
-            GeneralUtils.showOrderedClaims(Cv);
+            System.out.println("Ordered sources:"+GeneralUtils.showOrderedSources(Ts));
+            System.out.println("Ordered claims:"+GeneralUtils.showOrderedClaims(Cv));
+            System.out.println("Ts Scores: "+Ts);
+            System.out.println("Tv Scores: "+Tv);
+            System.out.println("Cv Scores: "+Cv);
             GeneralUtils.showClaimsPerDataItems(Cv);
             
             iter++;

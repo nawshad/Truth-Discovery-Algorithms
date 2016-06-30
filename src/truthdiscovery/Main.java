@@ -36,7 +36,7 @@ public class Main {
      Rows are sources and columns are claims. 1 means there is a connection between source and claims.
      */
     public static double scores[][] = {
-        // C0 C1 C2 C3 C4 C5 C6
+            // C0 C1 C2 C3 C4 C5 C6
         /*S0*/{1, 0, 0, 0, 0, 0, 0},
         /*S1*/ {1, 0, 0, 1, 0, 0, 0},
         /*S2*/ {0, 1, 0, 0, 0, 0, 0},
@@ -246,22 +246,7 @@ public class Main {
                         break;
                 
             default:  System.out.println("Wrong Choice");
-        }
-        
-        /*LinkedHashSet<String> lhs1 = new LinkedHashSet<String>();
-        LinkedHashSet<String> lhs2 = new LinkedHashSet<String>();
-            
-        lhs1.add("S1");
-        lhs1.add("S2");
-        System.out.println("First Set:"+lhs1);
-        
-        
-        lhs2.add("S1");
-        lhs2.add("S2");
-        System.out.println("Second Set:"+lhs2);
-        
-        System.out.println("Equal?: "+lhs1.equals(lhs2)+":"+GeneralUtils.isSameSet(lhs1, lhs2));*/
-        
+        } 
         
     }
 }

@@ -71,6 +71,14 @@ public class Investment {
             }
 
             //System.out.println("Source Scores: "+sourceScores);
+            
+            /*if(GeneralUtils.isSameSet(GeneralUtils.showOrderedSources(Ts_0),GeneralUtils.showOrderedSources(sourceScores))){
+                break;
+            };*/
+            
+           /* System.out.println("Prev Ordered Source: "+GeneralUtils.showOrderedSources(Ts_0));
+            System.out.println("Current Ordered Source: "+GeneralUtils.showOrderedSources(sourceScores));*/
+            
             Ts_0 = sourceScores;
             //System.out.println("Co_V values: "+Co_V);
 
@@ -89,13 +97,15 @@ public class Investment {
                 claimScores.add(sum_claim_score);
             }
 
-            //System.out.println("Claim Scores: "+claimScores);
+            
             Cv_0 = claimScores;
             
             System.out.println("\nIteration: "+iter);
             
-            GeneralUtils.showOrderedSources(sourceScores);
-            GeneralUtils.showOrderedClaims(claimScores);
+            System.out.println("Source Scores:"+GeneralUtils.showOrderedSources(sourceScores));
+            System.out.println("Claim Scores:"+GeneralUtils.showOrderedClaims(claimScores));
+            System.out.println("Source Scores: "+sourceScores);
+            System.out.println("Claim Scores: "+claimScores);
             GeneralUtils.showClaimsPerDataItems(claimScores);
             
             iter++;     
@@ -155,6 +165,10 @@ public class Investment {
             }
 
             //System.out.println("Source Scores: "+sourceScores);
+            /*if(GeneralUtils.isSameSet(GeneralUtils.showOrderedSources(Ts_0),GeneralUtils.showOrderedSources(sourceScores))){
+                break;
+            };*/
+            
             Ts_0 = sourceScores;
             //System.out.println("Co_V values: "+Co_V);
 
@@ -193,8 +207,10 @@ public class Investment {
             
             System.out.println("\nIteration: "+iter);
             
-            GeneralUtils.showOrderedSources(sourceScores);
-            GeneralUtils.showOrderedClaims(claimScores);
+            System.out.println("Ordered Sources:"+GeneralUtils.showOrderedSources(sourceScores));
+            System.out.println("Ordered Claims:"+GeneralUtils.showOrderedClaims(claimScores));
+            System.out.println("Source Scores:"+sourceScores);
+            System.out.println("Claim Scores:"+claimScores);
             GeneralUtils.showClaimsPerDataItems(claimScores);
             
             iter++;

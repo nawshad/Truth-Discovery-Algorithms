@@ -72,7 +72,6 @@ public class GeneralUtils {
                  }
              }
         }
-
         return sourcesListforDataItem;
     }
     

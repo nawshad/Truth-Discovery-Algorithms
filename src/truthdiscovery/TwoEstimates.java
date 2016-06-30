@@ -107,12 +107,13 @@ public class TwoEstimates {
             
             System.out.println("\nIteration: "+iter);
             
-            GeneralUtils.showOrderedSources(sourceScores);
-            GeneralUtils.showOrderedClaims(Cv);
+            System.out.println("Ordered Sources: "+GeneralUtils.showOrderedSources(sourceScores));
+            System.out.println("Ordered Claims:"+GeneralUtils.showOrderedClaims(Cv));
+            System.out.println("Source Scores: "+sourceScores);
+            System.out.println("Claim Scores: "+Cv);
             GeneralUtils.showClaimsPerDataItems(Cv);
             
-            //System.out.println("Source Scores: "+sourceScores);
-            //System.out.println("Claim Scores: "+Cv);
+           
             
             iter++;
                 

@@ -128,16 +128,22 @@ public class Cosine {
                 claimScores.add(claim_score);
                 
             }
+            
+            /*if(GeneralUtils.isSameSet(GeneralUtils.showOrderedSources(Ts_0),GeneralUtils.showOrderedSources(sourceScores))){
+                break;
+            };*/
+            
             Cv_0 = claimScores;
             Ts_0 = sourceScores;
             
             System.out.println("\nIteration: "+iter);
             
-            GeneralUtils.showOrderedSources(sourceScores);
-            GeneralUtils.showOrderedClaims(claimScores);
+            System.out.println("Ordered Sources:"+GeneralUtils.showOrderedSources(sourceScores));
+            System.out.println("Ordered Claims:"+GeneralUtils.showOrderedClaims(claimScores));
             GeneralUtils.showClaimsPerDataItems(claimScores);
 
-            //System.out.println("Claim Values: "+claimScores);
+            System.out.println("Source scores:" +sourceScores);
+            System.out.println("Claim scores: "+claimScores);
 
             iter++;
         }
