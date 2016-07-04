@@ -36,7 +36,7 @@ For Cosine, Two Estimates and Three Estimates, the source and claim scores could
 
 ### Notes on Algorithms for Stock DataSet ###
 
-* Majority voting based algorithms are more accurate. Algorithms may provide unexpected result based on input data characteristic. for example, if multiple data items have same claim values, then that claim
+* Sum voting based algorithms are more reliable. Algorithms may provide unexpected result based on input data characteristic, e.g, if multiple data items have same claim values, then that claim
 value gets more emphasis than other less popular value in data item.
 
 * Investment, Pooled Investment, Cosine and Truth Finding algorithms puts emphasis on rare claim which is repeated in each data item.
