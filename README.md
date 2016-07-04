@@ -10,9 +10,13 @@ This is version 1 of such code implementation by the author. This version contai
 
 ### Data and Implementation Overview ###
 
-The data provided in the book, has three data items, such as, presidents of US, France and Russia. US has two values or claims, such as Obama and Clinton, likewise, France has Hollande and Sarcozy and Russia has Putin, Yeltsin and Medvedev. There are total 7 sources which are claiming these 7 values. The relation between the sources and claims are represented as a 2D matrix, where rows are sources and columns are claims. Different helper functions have been written for truth value calculation (have a look at utils package in the source code). Based on the majority voting algorithms (Sum and Avg Log), the most confident claims are: US->Obama, Russia->Yeltsin and France-> Hollande. The most trusted sources are: S4, S5, S6, S2, S1, S3, S7. See the source code scores matrix to see the relationship between sources and claims.
 
-### Notes on Algorithms ###
+* Book Example Data: The data provided in the book, has three data items, such as, presidents of US, France and Russia. US has two values or claims, such as Obama and Clinton, likewise, France has Hollande and Sarcozy and Russia has Putin, Yeltsin and Medvedev. There are total 7 sources which are claiming these 7 values. The relation between the sources and claims are represented as a 2D matrix, where rows are sources and columns are claims. Different helper functions have been written for truth value calculation (have a look at utils package in the source code). Based on the majority voting algorithms (Sum and Avg Log), the most confident claims are: US->Obama, Russia->Yeltsin and France-> Hollande. The most trusted sources are: S4, S5, S6, S2, S1, S3, S7. See the source code scores matrix to see the relationship between sources and claims.
+
+* Real World Data (Stock Data, from [Luna Dong](http://lunadong.com/fusionDataSets.htm)): Stock market data 
+for date 2011-07-01 has been utilized. The change of stock price has been used as claim, whereas the first and the second column of tab seperated text file indicates the source and data item list respectively. Stock data from the source NASDAQ (for same date) has been used as the ground truth. 
+
+### Notes on Algorithms for Synthetic DataSet ###
 
 The following observation can be made from this version of implementation (this may subject to change later based on further code refactoring and fixing bugs). 
 
@@ -30,13 +34,24 @@ Pooled investment reach convergence much earlier than investment.
 
 For Cosine, Two Estimates and Three Estimates, the source and claim scores could be normalized because in many cases the values grows much bigger and in negative range. 
 
+### Notes on Algorithms for Stock DataSet ###
 
+* Majority voting based algorithms are more accurate. Algorithms may provide unexpected result based on input data characteristic. for example, if multiple data items have same claim values, then that claim
+value gets more emphasis than other less popular value in data item.
+
+* Investment, Pooled Investment, Cosine and Truth Finding algorithms puts emphasis on rare claim which is repeated in each data item.
+
+* 2 and 3 estimates put emphasis on local data item specific rare value. 
+
+Overall, the sum based algoithms perform much better with respect to few iterations and precision than the other algorithms which goes hand in hand with the observation stated in the paper where the datasets were used.
 
 ### How do I get set up? ###
 
-Clone the repo in your local space or download it. Go inside the folder, run the following command: java -classpath "dist/TruthDiscovery.jar:dist/lib/*:" truthdiscovery.Main <arg1>. 
+Clone the repo in your local space or download it. Go inside the folder, run the following command: java -classpath "dist/TruthDiscovery.jar:dist/lib/*:" truthdiscovery.Main <arg1> <arg2> 
 
-arg1 can take value 1 to 9. Following are the argument values corresponding to different truth discovery algorithms :
+arg1 can take two values/switches. Using -sd switch enables the user to run the algorithms with the example data given in the book, where -d can be used for running the algorithms with real data, i.e. stock market data.
+
+arg2 can take value 1 to 9. Following are the argument values corresponding to different truth discovery algorithms :
 
 1. Sum
 2. Average Log
