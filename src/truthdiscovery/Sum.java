@@ -10,6 +10,8 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import static truthdiscovery.Main.Vs_count_List;
 import static truthdiscovery.Main.claimList;
+import static truthdiscovery.Main.col;
+import static truthdiscovery.Main.row;
 import static truthdiscovery.Main.scores;
 import static truthdiscovery.Main.sourceList;
 import static truthdiscovery.Main.totalIter;
@@ -22,9 +24,10 @@ import utils.MatrixOps;
  */
 public class Sum {
     public static void SumFactFinder(double factor , boolean isAvgLog){
+       ///System.out.println("Scores Length: "+scores.length);
        double init_claim_value = 1; 
        ArrayList<Double> Cv_0 = new ArrayList<Double>();
-       for(int i=0; i<scores[0].length; i++){
+       for(int i=0; i< col; i++){
            Cv_0.add(init_claim_value);
        }
        //Source score calculation 
@@ -39,10 +42,10 @@ public class Sum {
            claimScores = new ArrayList<Double>();
            
            //Source score calculation
-            for(int i=0; i<scores.length; i++){
+            for(int i=0; i< row; i++){
                 double sum = 0;
-                for(int j=0; j<scores[i].length; j++){
-                   if(scores[i][j] == 1){
+                for(int j=0; j< col; j++){
+                   if(scores.get(i).get(j) == 1){
                        sum += Cv_0.get(j);
                    } 
                    if(isAvgLog){
@@ -62,10 +65,10 @@ public class Sum {
             
 
             //Claim score calculation
-            for(int i=0; i<scores.length; i++){
+            for(int i=0; i<col; i++){
                  double sum = 0;     
-                 for(int j=0; j<scores[i].length; j++){
-                     if(scores[j][i] == 1){
+                 for(int j=0; j<row; j++){
+                     if(scores.get(j).get(i) == 1){
                          sum += sourceScores.get(j) ;
                      }
                  }

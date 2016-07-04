@@ -6,6 +6,8 @@
 package truthdiscovery;
 
 import java.util.ArrayList;
+import static truthdiscovery.Main.col;
+import static truthdiscovery.Main.row;
 import static truthdiscovery.Main.scores;
 import static truthdiscovery.Main.totalIter;
 import utils.GeneralUtils;
@@ -19,14 +21,14 @@ public class ThreeEstimates {
         //initialize To_S
         double init_To_value = Ts_0_value;
         ArrayList<Double> Ts_0 = new ArrayList<Double>();
-        for(int i=0; i<scores.length; i++){
+        for(int i=0; i<row; i++){
             Ts_0.add(init_To_value);
         }
         
         //init Tv_S
         double init_Tv_value = Tv_0_value;
         ArrayList<Double> Tv_0 = new ArrayList<Double>();
-        for(int i=0; i<scores.length; i++){
+        for(int i=0; i<row; i++){
             Tv_0.add(init_To_value);
         }
         
@@ -40,7 +42,7 @@ public class ThreeEstimates {
             double claim_score = 0;
             ArrayList<Double>  Cv = new ArrayList<Double>();
             //for each claim
-            for(int i=0; i<scores[0].length;i++){
+            for(int i=0; i<col;i++){
                 //find out source list for that claim ID
                 for(int j=0; j<GeneralUtils.sourceListforClaims(i).size(); j++){
                     positive += ((Ts_0.get(GeneralUtils.sourceListforClaims(i).get(j)))*(Ts_0.get(GeneralUtils.sourceListforClaims(i).get(j))));
@@ -83,7 +85,7 @@ public class ThreeEstimates {
             double Tv_score = 0;
             ArrayList<Double>  Tv = new ArrayList<Double>();
             //for each claim
-            for(int i=0; i<scores[0].length;i++){
+            for(int i=0; i<col;i++){
                 //find out source list for that claim ID
                 for(int j=0; j<GeneralUtils.sourceListforClaims(i).size(); j++){
                     positive += (Cv.get(i)/(1-Ts_0.get(GeneralUtils.sourceListforClaims(i).get(j))));
@@ -121,12 +123,12 @@ public class ThreeEstimates {
             norm = 0;
             double length_V_Ds = 0;
             double source_score = 0;
-            for(int i=0;i<scores.length; i++){
+            for(int i=0;i<row; i++){
                 ArrayList<Integer> positiveClaimListforSource = new ArrayList<Integer>();
                 ArrayList<Integer> negativeClaimListforSource = new ArrayList<Integer>();
 
-                for(int j=0; j<scores[i].length; j++){      
-                    if(scores[i][j] == 1){
+                for(int j=0; j<col; j++){      
+                    if(scores.get(i).get(j) == 1){
                         positive += Cv.get(j)/(1-Tv.get(i));
                         positiveClaimListforSource.add(j);
                     }

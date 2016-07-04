@@ -7,7 +7,9 @@ package truthdiscovery;
 
 import java.util.ArrayList;
 import static truthdiscovery.Main.Vs_count_List;
+import static truthdiscovery.Main.col;
 import static truthdiscovery.Main.gamma;
+import static truthdiscovery.Main.row;
 import static truthdiscovery.Main.scores;
 import static truthdiscovery.Main.totalIter;
 import utils.GeneralUtils;
@@ -21,7 +23,7 @@ public class TruthFinder {
         //init To_S;
        double source_init_value = Ts_0_value;
        ArrayList<Double> Ts_0 = new ArrayList<Double>();
-        for(int i=0; i<scores.length; i++){
+        for(int i=0; i<row; i++){
             Ts_0.add(source_init_value);
         } 
 
@@ -29,10 +31,10 @@ public class TruthFinder {
         while(iter < totalIter){
             ArrayList<Double> claimScores = new ArrayList<Double>(); 
             
-            for(int i=0; i<scores.length; i++){
+            for(int i=0; i<col; i++){
                 double claim_Score = 0;
-                for(int j=0; j<scores[i].length; j++){
-                    if(scores[j][i] == 1){
+                for(int j=0; j<row; j++){
+                    if(scores.get(j).get(i) == 1){
                         claim_Score += -(Math.log(1-Ts_0.get(j)));
                     }
                 }
@@ -42,10 +44,10 @@ public class TruthFinder {
             //System.out.println("ClaimScores:"+claimScores);
 
             ArrayList<Double> sourceScores = new ArrayList<Double>();
-            for(int i=0; i<scores.length; i++){
+            for(int i=0; i<row; i++){
                 double sum_per_source = 0;
-                for(int j=0; j<scores[i].length; j++){
-                    if(scores[i][j] == 1){
+                for(int j=0; j<col; j++){
+                    if(scores.get(i).get(j) == 1){
                         sum_per_source += (1 - Math.exp(-gamma*(claimScores.get(j)/*copy_scores_for_truthfinder[i][j])*/)));
                     }
                 }

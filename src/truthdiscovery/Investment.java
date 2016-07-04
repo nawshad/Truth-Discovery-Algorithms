@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import static truthdiscovery.Main.Sv_count_List;
 import static truthdiscovery.Main.Vs_count_List;
+import static truthdiscovery.Main.col;
 import static truthdiscovery.Main.listDataItems;
+import static truthdiscovery.Main.row;
 import static truthdiscovery.Main.scores;
 import static truthdiscovery.Main.totalIter;
 import utils.GeneralUtils;
@@ -23,7 +25,7 @@ public class Investment {
         //init Sources
         double init_source_value = Ts_0_value; 
         ArrayList<Double> Ts_0 = new ArrayList<Double>();
-        for(int i=0; i<scores.length; i++){
+        for(int i=0; i<row; i++){
             Ts_0.add(init_source_value);
         }
          
@@ -33,7 +35,7 @@ public class Investment {
         ArrayList<Double> claimScores = new ArrayList<Double>();
         
         double Co = 0;
-        for(int i=0; i<scores[0].length; i++){
+        for(int i=0; i< col; i++){
             double Sv_Length = Sv_count_List.get(i);
             double S_Ds_Length = GeneralUtils.sourceListforDataItem(GeneralUtils.findDataItemIndex(i)).size();
             Co = (Sv_Length/S_Ds_Length);
@@ -46,12 +48,12 @@ public class Investment {
             sourceScores = new ArrayList<Double>();
             //Source value calculation
             double source_score = 0;
-            for(int i=0; i<scores.length; i++){
+            for(int i=0; i<row; i++){
                 double multiply_Cv_Ts = 0;
                 double denominator = 0;
                 double sum_of_avg_Ts = 0;
-                for (int j=0; j<scores[i].length; j++){
-                    if(scores[i][j] == 1){
+                for (int j=0; j<col; j++){
+                    if(scores.get(i).get(j) == 1){
                         multiply_Cv_Ts = Cv_0.get(j) * Ts_0.get(i);        
                         //Find the source list of this claim
                         for(int k=0; k<GeneralUtils.sourceListforClaims(j).size(); k++){
@@ -85,10 +87,10 @@ public class Investment {
             claimScores = new ArrayList<Double>();
             //Claim Score Calculation
             double sum_claim_score = 0;
-            for(int i=0; i<scores.length; i++){
+            for(int i=0; i<col; i++){
                 double sum_avg_Ts = 0;
-                for(int j=0; j<scores[i].length; j++){
-                    if(scores[j][i] == 1){
+                for(int j=0; j<row; j++){
+                    if(scores.get(j).get(i) == 1){
                         double avg_Ts = Ts_0.get(j)/Vs_count_List.get(j);
                         sum_avg_Ts += avg_Ts;
                     }
@@ -116,7 +118,7 @@ public class Investment {
            //init Sources
         double init_source_value = Ts_0_value; 
         ArrayList<Double> Ts_0 = new ArrayList<Double>();
-        for(int i=0; i<scores.length; i++){
+        for(int i=0; i<row; i++){
             Ts_0.add(init_source_value);
         }
          
@@ -126,7 +128,7 @@ public class Investment {
         ArrayList<Double> claimScores = new ArrayList<Double>();
         
         double Co = 0;
-        for(int i=0; i<scores[0].length; i++){
+        for(int i=0; i<col; i++){
             double S_Ds_Length = listDataItems.get(GeneralUtils.findDataItemIndex(i)).size();
             Co = (1/S_Ds_Length);
             //System.out.println(Co);
@@ -140,12 +142,12 @@ public class Investment {
             sourceScores = new ArrayList<Double>();
             //Source value calculation
             double source_score = 0;
-            for(int i=0; i<scores.length; i++){
+            for(int i=0; i<row; i++){
                 double multiply_Cv_Ts = 0;
                 double denominator = 0;
                 double sum_of_avg_Ts = 0;
-                for (int j=0; j<scores[i].length; j++){
-                    if(scores[i][j] == 1){
+                for (int j=0; j<col; j++){
+                    if(scores.get(i).get(j) == 1){
                         multiply_Cv_Ts = Cv_0.get(j) * Ts_0.get(i);        
                         //Find the source list of this claim
                         for(int k=0; k<GeneralUtils.sourceListforClaims(j).size(); k++){
@@ -177,12 +179,12 @@ public class Investment {
             //Claim Score Calculation
             double final_claim_score = 0;
             
-            for(int i=0; i<scores.length; i++){
+            for(int i=0; i<col; i++){
                 double Hv_score = 0;
                 double powered_Hr_score = 0;
                 double powered_Hr_score_sum = 0;
-                for(int j=0; j<scores[i].length; j++){
-                    if(scores[j][i] == 1){
+                for(int j=0; j<row; j++){
+                    if(scores.get(j).get(i) == 1){
                         double avg_Ts = Ts_0.get(j)/Vs_count_List.get(j);
                         Hv_score += avg_Ts;
                     }  

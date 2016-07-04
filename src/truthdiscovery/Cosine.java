@@ -6,6 +6,8 @@
 package truthdiscovery;
 
 import java.util.ArrayList;
+import static truthdiscovery.Main.col;
+import static truthdiscovery.Main.row;
 import static truthdiscovery.Main.scores;
 import static truthdiscovery.Main.totalIter;
 import utils.GeneralUtils;
@@ -20,14 +22,14 @@ public class Cosine {
          //init To_S;
         double source_init_value = Ts_0_value;
         ArrayList<Double> Ts_0 = new ArrayList<Double>();
-        for(int i=0; i<scores.length; i++){
+        for(int i=0; i<row; i++){
             Ts_0.add(source_init_value);
         } 
         
         //init claim
         double claim_init_value = Cv_0_value;
         ArrayList<Double> Cv_0 = new ArrayList<Double>();
-        for(int i=0; i<scores[0].length; i++){
+        for(int i=0; i<col; i++){
             Cv_0.add(source_init_value);
         } 
         
@@ -38,7 +40,7 @@ public class Cosine {
              ArrayList<Double> sourceScores = new ArrayList<Double>();
              ArrayList<Double> claimScores = new ArrayList<Double>();
 
-            for(int i=0; i<scores.length; i++){       
+            for(int i=0; i<row; i++){       
                 double positive = 0;
                 double negative = 0;
                 double norm = 0;
@@ -47,8 +49,8 @@ public class Cosine {
                 ArrayList<Integer> positiveClaimListforSource = new ArrayList<Integer>();
                 ArrayList<Integer> negativeClaimListforSource = new ArrayList<Integer>();
 
-                for(int j=0; j<scores[i].length; j++){      
-                    if(scores[i][j] == 1){
+                for(int j=0; j<col; j++){      
+                    if(scores.get(i).get(j) == 1){
                         positive += Cv_0.get(j);
                         positiveClaimListforSource.add(j);
                     }
@@ -93,7 +95,7 @@ public class Cosine {
             double norm = 0;
             double claim_score = 0;
             //for each claim
-            for(int i=0; i<scores[0].length;i++){
+            for(int i=0; i<col;i++){
                 //find out source list for that claim ID
                 for(int j=0; j<GeneralUtils.sourceListforClaims(i).size(); j++){
                     positive += Math.pow(Ts_0.get(GeneralUtils.sourceListforClaims(i).get(j)), 3);
@@ -140,10 +142,9 @@ public class Cosine {
             
             System.out.println("Ordered Sources:"+GeneralUtils.showOrderedSources(sourceScores));
             System.out.println("Ordered Claims:"+GeneralUtils.showOrderedClaims(claimScores));
-            GeneralUtils.showClaimsPerDataItems(claimScores);
-
             System.out.println("Source scores:" +sourceScores);
             System.out.println("Claim scores: "+claimScores);
+            GeneralUtils.showClaimsPerDataItems(claimScores);
 
             iter++;
         }

@@ -5,11 +5,14 @@
  */
 package truthdiscovery;
 
+import java.io.IOException;
 import static java.lang.Thread.sleep;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
+import utils.FileLoader;
 import utils.GeneralUtils;
+import utils.StaticDataLoader;
 
 /**
  *
@@ -31,19 +34,19 @@ public class Main {
     public static ArrayList<Integer> Russia = new ArrayList<Integer>();
     public static ArrayList<Integer> USA = new ArrayList<Integer>();
     public static ArrayList<Integer> France = new ArrayList<Integer>();
+    
+    //Contains all the data items / symbol names of stock and saved on DataItemListFromFile list
+    public static ArrayList<String> GroundTruthDataItemList = new ArrayList<String>();
 
     /* A 2D matrix stores the relationship between sources and claims.
      Rows are sources and columns are claims. 1 means there is a connection between source and claims.
      */
-    public static double scores[][] = {
-            // C0 C1 C2 C3 C4 C5 C6
-        /*S0*/{1, 0, 0, 0, 0, 0, 0},
-        /*S1*/ {1, 0, 0, 1, 0, 0, 0},
-        /*S2*/ {0, 1, 0, 0, 0, 0, 0},
-        /*S3*/ {0, 0, 1, 0, 1, 0, 0},
-        /*S4*/ {0, 0, 0, 0, 1, 1, 0},
-        /*S5*/ {0, 0, 0, 0, 1, 0, 0},
-        /*S6*/ {0, 0, 0, 0, 0, 0, 1},};
+    //public static double [][] scores = new double[7][7];
+    
+    public static ArrayList<ArrayList<Double>> scores = new ArrayList<ArrayList<Double>>();
+    
+    public static int row;
+    public static int col;
 
     public static ArrayList<Integer> Vs_count_List = new ArrayList<Integer>();
     //Calculating the number of sources for particular claims and store them in a list named numberSourcesforClaimsList
@@ -112,68 +115,25 @@ public class Main {
         
     }
     
-
-    public static void main(String[] args) throws InterruptedException {
-
-        Russia.add(0);// Each Data Items store a reference to the claim index.
-        Russia.add(1);
-        Russia.add(2);
-
-        listDataItems.add(Russia);
-
-        USA.add(3);
-        USA.add(4);
-
-        listDataItems.add(USA);
-
-        France.add(5);
-        France.add(6);
-
-        listDataItems.add(France);
-
-        System.out.println("List of DataItems Reference to claims: " + listDataItems);
-
-        sourceList.addAll(Arrays.asList("S1", "S2", "S3", "S4", "S5", "S6", "S7"));
-        claimList.addAll(Arrays.asList("Medvedev", "Putin", "Yeltsin", "Clinton", "Obama", "Hollande", "Sarcozy"));
-
-        System.out.println("Source List: "+ sourceList);
-        System.out.println("Claim List: "+ claimList);
-        
-        //Calculating Vs score for each sources and saving that in a list
-        for (int i = 0; i < scores.length; i++) {
-            int Vs = 0;
-            for (int j = 0; j < scores[i].length; j++) {
-                //System.out.print(scores[i][j]+" ");
-                if (scores[i][j] == 1) {
-                    Vs++;
-                }
-            }
-            Vs_count_List.add(Vs);
-            //System.out.println();
-        }
-       
-        for (int i = 0; i < scores[0].length; i++) {
-            int sourceCount = 0;
-            for (int j = 0; j < scores.length; j++) {
-                if (scores[j][i] == 1) {
-                    sourceCount++;
-                }
-            }
-            Sv_count_List.add(sourceCount);
+    public static void main(String[] args) throws InterruptedException, IOException {
+        if(args[0].equals("-d")){
+            FileLoader.loadCleanFile("Data/clean_stock/ground_truth_nasdaq.txt","Data/clean_stock/stock-2011-07-01.csv");       
+        }else if(args[0].equals("-sd")){
+            StaticDataLoader.loadStaticData();
         }
         
-        System.out.println("Source-Claim realationship Matrix:");
-        GeneralUtils.showMatrix(scores);
         
-        System.out.println("Claim counts for sources (Vs_Count) :" +Vs_count_List);
-        System.out.println("Source counts for claims (Sv_Count) :" +Sv_count_List);
+        System.out.println("Scores Length: "+scores.size());
+        /*double Cv_0 = 0.5;
+        boolean isAvgLog = false;
+        Sum.SumFactFinder(Cv_0, isAvgLog);*/
         
         double Cv_0 = 0; //initial claim values
         double Ts_0 = 0;
         double Tv_0 = 0;
-        int iter = 0;
+        int iter = 0; 
 
-        switch(args[0]){
+        switch(args[1]){
             case "1":   System.out.println("\n\n**************************************************SUM*********************************************************************\n\n");
                         Thread.sleep(4000);
                         Cv_0 = 0.5;
@@ -234,7 +194,7 @@ public class Main {
                         //Three Estimates
                         //Calculation breaks if Ts_0 = 1 is used.
                         //Claims converges, though Sources don't converge rather oscilates between two sets of results.
-                        iter = 25;
+                        iter = 15;
                         Ts_0 = 0.8;
                         Tv_0 = 0.9;
                         ThreeEstimates.ThreeEstimatesFunction(Ts_0, Tv_0, iter);
@@ -246,7 +206,6 @@ public class Main {
                         break;
                 
             default:  System.out.println("Wrong Choice");
-        } 
-        
+        }
     }
 }

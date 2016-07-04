@@ -9,9 +9,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import static truthdiscovery.Main.GroundTruthDataItemList;
 import static truthdiscovery.Main.Sv_count_List;
 import static truthdiscovery.Main.claimList;
+import static truthdiscovery.Main.col;
 import static truthdiscovery.Main.listDataItems;
+import static truthdiscovery.Main.row;
 import static truthdiscovery.Main.scores;
 import static truthdiscovery.Main.sourceList;
 
@@ -45,10 +48,10 @@ public class GeneralUtils {
     //Given a claim id finds out all the sources that are claiming it and returns as an ArrayList
     public static ArrayList<Integer> sourceListforClaims(int claimIndex/*, double[][] scores*/){
         ArrayList<Integer> sourceList = new ArrayList<Integer>();
-        for(int i=0; i<scores[0].length; i++){
-            for (int j=0; j<scores.length; j++){
+        for(int i=0; i < col; i++){
+            for (int j=0; j< row; j++){
                 if(i==claimIndex){
-                    if(scores[j][i]>0){
+                    if(scores.get(j).get(i)>0){
                         //System.out.println("j value:"+j+" i value:"+i);
                         sourceList.add(j);
                     }
@@ -79,8 +82,8 @@ public class GeneralUtils {
         ArrayList<Integer> claimsListforDataItem = new ArrayList<Integer>(); 
        
         //find out all the data items  index where that claim exist
-        for(int h=0; h<scores[SourceID].length; h++){
-            if(scores[SourceID][h]==1){
+        for(int h=0; h<scores.get(SourceID).size(); h++){
+            if(scores.get(SourceID).get(h) == 1){
                 //System.out.println("h: "+h);
                 for(int i=0; i<listDataItems.get(GeneralUtils.findDataItemIndex(h)).size(); i++){
                     claimsListforDataItem.add(listDataItems.get(GeneralUtils.findDataItemIndex(h)).get(i));   
@@ -135,8 +138,16 @@ public class GeneralUtils {
                 System.out.print(matrix[i][j]+"\t");
             }
             System.out.println();
-        }
-        
+        }  
+    }
+    
+    public static void showMatrix(ArrayList<ArrayList<Double>> matrix){
+        for(int i=0; i<matrix.size(); i++){
+            for(int j=0; j<matrix.get(i).size(); j++){
+                System.out.print(matrix.get(i).get(j)+"\t");
+            }
+            System.out.println();
+        }  
     }
     
     public static void showClaimsPerDataItems(ArrayList<Double> claimScore){
@@ -168,7 +179,7 @@ public class GeneralUtils {
                 for(int k=0; k<listDataItems.get(j).size(); k++){
                     if(sortedClaimIDs.get(i)==listDataItems.get(j).get(k)){
                         if(sortedClaimIDs.get(i)==listDataItems.get(j).get(k)){  
-                            System.out.print(claimList.get(listDataItems.get(j).get(k))+" ");
+                            System.out.println(GroundTruthDataItemList.get(j)+" >> ["+claimList.get(listDataItems.get(j).get(k))+"] ");
                             coveredDataItemIndex.add(j);
                             break;
                         }
@@ -176,7 +187,7 @@ public class GeneralUtils {
                 }
             }
         }
-        System.out.println();   
+        //System.out.println();   
     }
     
     //Compares two linked hash sets based on the elements it has in a certain order.
