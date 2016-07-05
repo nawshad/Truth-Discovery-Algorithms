@@ -36,14 +36,24 @@ For Cosine, Two Estimates and Three Estimates, the source and claim scores could
 
 ### Notes on Algorithms for Stock DataSet ###
 
-* Sum voting based algorithms are more reliable. Algorithms may provide unexpected result based on input data characteristic, e.g, if multiple data items have same claim values, then that claim
-value gets more emphasis than other less popular value in data item.
+* Accuracy in the following points indicate how many data items provided the same value as the ground truth data, out of total data items.
 
-* Investment, Pooled Investment, Cosine and Truth Finding algorithms puts emphasis on rare claim which is repeated in each data item.
+* Majority voting based algorithms are more accurate. Algorithms may provide unexpected result based on input data characteristic, e.g., if multiple data items have same claim values, then that claim
+value gets more emphasis than other less popular value in data item. 
 
-* 2 and 3 estimates put emphasis on local data item specific rare value. 
+* Cosine's accuracy is better after the accuracy of summation based methods.
 
-Overall, the sum based algoithms perform much better with respect to few iterations and precision than the other algorithms which goes hand in hand with the observation stated in the paper where the datasets were used.
+* Investment, Pooled Investment puts emphasis on rare claim which is repeated in most data item, 
+Like, the value 0.0 is repeated in all the the data items at least once.
+
+* Cosine and Truth Finding algorithms puts emphasis on rare claims in a data item which is repeated
+number of times in other data items, across all the data items. Truth finder is less accurate than Cosine, 
+with each iteration the accuracy of Cosine decreases.
+
+* 2 and 3 estimates has same results like Cosine, except the their result does not degrade with further
+iterationa=s.
+
+Overall, the sum based algoithms perform much better with respect to few iterations and accuracy than the other algorithms which goes hand in hand with the observation stated in the paper where the datasets were used.
 
 ### How do I get set up? ###
 
