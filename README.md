@@ -44,7 +44,7 @@ value gets more emphasis than other less popular value in data item. The overall
 * Cosine's accuracy is better after the accuracy of summation based methods. Overall accuracy is ~0.88
 
 * Investment, Pooled Investment puts emphasis on rare claim which is repeated in most data item, 
-Like, the value 0.0 is repeated in all the the data items at least once, overall accuracy is ~0.4 and ~0.3 respectively. 
+Like, the value 0.0 is repeated in all the the data items at least once, overall accuracy (for both of them) is ~0.3. 
 
 * Cosine and Truth Finding algorithms puts emphasis on rare claims in a data item which is repeated
 number of times in other data items, across all the data items. Truth finder is less accurate than Cosine, with each iteration the accuracy of Cosine decreases. Cosine accuracy starts with ~0.88 then gradually decreases if iteration is more.
