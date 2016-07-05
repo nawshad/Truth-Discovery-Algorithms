@@ -39,19 +39,18 @@ For Cosine, Two Estimates and Three Estimates, the source and claim scores could
 * Accuracy in the following points indicate how many data items provided the same value as the ground truth data, out of total data items.
 
 * Majority voting based algorithms are more accurate. Algorithms may provide unexpected result based on input data characteristic, e.g., if multiple data items have same claim values, then that claim
-value gets more emphasis than other less popular value in data item. 
+value gets more emphasis than other less popular value in data item. The overall accuracy is close to 0.94.
 
-* Cosine's accuracy is better after the accuracy of summation based methods.
+* Cosine's accuracy is better after the accuracy of summation based methods. Overall accuracy is 0.88
 
 * Investment, Pooled Investment puts emphasis on rare claim which is repeated in most data item, 
-Like, the value 0.0 is repeated in all the the data items at least once.
+Like, the value 0.0 is repeated in all the the data items at least once, overall accuracy is 0.4 and 0.3 respectively. 
 
 * Cosine and Truth Finding algorithms puts emphasis on rare claims in a data item which is repeated
-number of times in other data items, across all the data items. Truth finder is less accurate than Cosine, 
-with each iteration the accuracy of Cosine decreases.
+number of times in other data items, across all the data items. Truth finder is less accurate than Cosine, with each iteration the accuracy of Cosine decreases. Cosine accuracy starts with 0.88 then gradually decreases if iteration is more.
 
 * 2 and 3 estimates has same results like Cosine, except the their result does not degrade with further
-iterationa=s.
+iterations, accuracy is ~0.85.
 
 Overall, the sum based algoithms perform much better with respect to few iterations and accuracy than the other algorithms which goes hand in hand with the observation stated in the paper where the datasets were used.
 
