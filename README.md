@@ -22,7 +22,7 @@ The following observation can be made from this version of implementation (this 
 
 Except the last three algorithms, all the other ones converges in a few interations, (i.e. Source and Claim values become fixed). At this version, convergence checking and breaking out the loop is not important because more emphasis was provided on implementing algorithms and testing manually with different number of iterations.
 
-*  ***Avg Log***: This algorithm has some issues when a source has exactly one value/claim. The 10 based logarithm returns 0 result for such a scinario. An extra parameter can be used and a default value can be set in that for calculation to avoid this. Avg Log( took 2 iterations) converges earlier than Sum (took 4 iterations). 
+*  ***Avg Log***: This algorithm has some issues when a source has exactly one value/claim. The 10 based logarithm returns 0 result for such a scenario. An extra parameter can be used and a default value can be set in that for calculation to avoid this. Avg Log( took 2 iterations) converges earlier than Sum (took 4 iterations). 
 
 * ***Cosine***: Converged after too many (2207) iteration.
 
