@@ -3,7 +3,7 @@
 ### What is this repository for? ###
 
 * Quick summary:
-This repository contains the experiment code for different truth discovery algorithms referred from [Veracity of Data](https://link.springer.com/book/10.1007/978-3-031-01855-8)). 
+This repository contains the experiment code for different truth discovery algorithms referred from [Veracity of Data](https://link.springer.com/book/10.1007/978-3-031-01855-8). 
 
 * Version:
 This is version 1 of such code implementation by the author. This version contains exact implementation of agreement based truth discovery formulae stated in the above mentioned book. 
