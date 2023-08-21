@@ -3,7 +3,7 @@
 ### What is this repository for? ###
 
 * Quick summary:
-This repository contains the experiment code for different truth discovery algorithms referred from [Veracity of Data: From Truth Discovery Computation Algorithms to Models of Misinformation Dynamics](http://www.morganclaypool.com/doi/abs/10.2200/S00676ED1V01Y201509DTM042). 
+This repository contains the experiment code for different truth discovery algorithms referred from [Veracity of Data](https://link.springer.com/book/10.1007/978-3-031-01855-8)). 
 
 * Version:
 This is version 1 of such code implementation by the author. This version contains exact implementation of agreement based truth discovery formulae stated in the above mentioned book. 
